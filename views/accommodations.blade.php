@@ -1,6 +1,7 @@
 
 @extends('layouts.app')
 @section('content')
+<a href="accommodations.blade.php"></a>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 <head>
@@ -122,78 +123,7 @@ figure figcaption{
     <button id="view" class="button"><span>View</span></button>
     </figure>
     </div>
-    <div class="zoom">
-  <figure>
-    <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-    <img src="{{ url('https://cf.bstatic.com/images/hotel/max1024x768/475/47561092.jpg') }}" alt="pieMaijasphoto" style="width:180px" style="height:90px">
-    <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-  </figure>
-  </div>
-  <div class="zoom">
-  <figure>
-    <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-    <img src="{{ url('https://www.kundzinusalas.lv/uploads/s8dKNI5y/767x0_2560x0/kundzinu-salas-pirts-maja-zagatas-01.jpg') }}" alt="Baronaaptphoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-  </figure>
-  </div>
-  <div class="zoom">
-    <figure>
-      <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-    <img src="{{ url('https://liepaja.travel/app/uploads/2019/05/dsc08789-800x450.jpg') }}" alt="Kundziniphoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-  </figure>
-  </div>
-  <div class="zoom">
-    <figure>
-      <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-    <img src="{{ url('https://viesunamiem.lv/content/images/object/4794.jpg') }}" alt="Saulgoziphoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-  </figure>
-  </div>
-<div class="zoom">
-<figure>
-<figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-<img src="{{ url('https://lh3.googleusercontent.com/proxy/SD4Xy_jKMAb2Tm1aj62y0kPlQAL2qK8kjVgsqK71WRFB2nwF6_BEwCriSkztelcNXNPbZaViP8mKfPZ5G7Bsdp5kqa5tqwKci5YawRuDXBStC8DWIp7n_LmGNw') }}" alt="Jaundzervitephoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-</figure>
-</div>
-<div class="zoom">
-<figure>
-<figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-<img src="{{ url('https://viesunamiem.lv/content/images/object/56980.jpg') }}" alt="Karumniekiphoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-</figure>
-</div>
-<div class="zoom">
-<figure>
-  <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-<img src="{{ url('https://viesunamiem.lv/content/images/object/54702.jpg') }}" alt="Vecmuizaphoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-</figure>
-</div>
-<div class="zoom">
-<figure>
-  <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-<img src="{{ url('https://viesunamiem.lv/content/images/object/53082.jpg') }}" alt="Agavephoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-</figure>
-</div>
-<div class="zoom">
-<figure>
-  <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-<img src="{{ url('https://www.celotajs.lv/g/Accomm/Latvia/Kurzeme/668/IMG_9921.JPG?size=640') }}" alt="Ventspilsphoto" style="width:180px" style="height:90px">
-<figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-<button id="view" class="button"><span>View</span></button>
-</figure>
-</div>
+    
 </div>
 <td>
 </td>
