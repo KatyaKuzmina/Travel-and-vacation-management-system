@@ -22,11 +22,11 @@ use App\Models\VacationPackages;
 
 
 
+Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::class, 'index'])->name('accommodation');
 
-
-Route::redirect('/', 'accommodation');
-Route::resource('accommodation', AccommodationController::class);
-Auth::routes();
+//Route::redirect('/', 'accommodation');
+//Route::resource('accommodation', AccommodationController::class);
+//Auth::routes();
 
 Route::redirect('/', 'vacation');
 Route::resource('vacation', VacationPackagesController::class);
@@ -34,9 +34,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get ( '/', function () {
-    return view ( 'asearch' );
-} );
+//Route::get ( '/', function () {
+//    return view ( 'asearch' );
+//} );
 Route::any ( '/search', function () {
     $q = Request::get ( 'q' );
     $accommodation = Accommodation::where ( 'accommodation_tags', 'LIKE', '%' . $q . '%' )->get ();
@@ -47,9 +47,9 @@ Route::any ( '/search', function () {
 } );
 
 
-Route::get ( '/', function () {
-    return view ( 'psearch' );
-} );
+//Route::get ( '/', function () {
+//    return view ( 'psearch' );
+//} );
 Route::any ( '/search2', function () {
     $q = Request::get ( 'q' );
     $vacation = VacationPackages::where ( 'package_tags', 'LIKE', '%' . $q . '%' )->get ();
@@ -58,3 +58,7 @@ Route::any ( '/search2', function () {
     else
         return view ( 'psearch' )->withMessage ( 'No vacation packages found. Try to search again !' );
 } );
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
