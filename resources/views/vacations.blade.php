@@ -107,6 +107,11 @@ figure figcaption{
         </form>
 </div>
 </div>
+        <div class="input-group">
+        <td>Start Date: <input type="date" name="start_date" required min="{{ date("Y-m-d") }}"></td>
+        <td>End Date: <input type="date" name="end_date" required min="{{ date("Y-m-d") }}"></td>
+        <td> <input type="submit" value="Go!">  </td>
+        </div>
         @if (count($vacations)==0)
 <p color='red'> Unfortunately, there are no vacation packages available for now!</p>
 @else
@@ -115,7 +120,7 @@ figure figcaption{
   <div class="zoom">
     <figure>
     <figcaption>{{ $vacation->package_name }}</figcaption>
-    <img src="{{ url('https://cdn.davanuserviss.lv/cache/images/4aae8de630134a638fd5d14be0bb938c.jpg') }}" alt="flyoverRiga" style="width:180px" style="height:90px">
+    <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
     <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
   <button id="view" class="button"><span>View</span></button>
     </figure>

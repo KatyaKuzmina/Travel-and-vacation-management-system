@@ -109,6 +109,14 @@ figure figcaption{
         </form>
 </div>
 </div>
+</div>
+@if(isset($details))
+  <p><center> The accommodations for your query <b> {{ $query }} </b> are :<center></p>
+  <div class="input-group">
+  <td>Start Date: <input type="date" name="start_date" required min="{{ date("Y-m-d") }}"></td>
+  <td>End Date: <input type="date" name="end_date" required min="{{ date("Y-m-d") }}"></td>
+  <td> <input type="submit" value="Go!">  </td>
+  </div>
         @if (count($details)==0)
 <p color='red'> Unfortunately, there are no accommodations available for now!</p>
 @else
@@ -117,7 +125,7 @@ figure figcaption{
   <div class="zoom">
     <figure>
     <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
-    <img src="{{ url('https://lh5.googleusercontent.com/p/AF1QipN8LC6vPsv4TSHgYM8cQ6Tfe4PjDeW-afWge9nQ=w600-h485-p-k-no') }}" alt="Dizkokiphoto" style="width:180px" style="height:90px">
+    <img src="{{ $accommodation->image }}" alt="accommodation_image" style="width:180px" style="height:90px">
     <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
     <button id="view" class="button"><span>View</span></button>
     </figure>
@@ -128,4 +136,5 @@ figure figcaption{
 @endforeach
 @endif
 </body>
+@endif
 @endsection

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<a href="accommodations.blade.php"></a>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 <head>
@@ -87,18 +88,19 @@ figure figcaption{
   -webkit-transform: scale(1.01); /* Safari 3-8 */
   transform: scale(1.01);
 }
+
 </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <img src="{{  url('https://caaneo.ca/static/014ffa5eede1abe6478b9e1d111daff8/b1a36/f0d045d1-d77c-448b-8042-cee808ac0525_adobestock_158208243-min.jpg') }}" width="100%" height="300px" alt="foto" >
-        <form action="/search2" method="POST" role="search2">
+        <img src="{{  url('https://www.hawaii-guide.com/images/made/kauai-accommodations_1_2100_750_85_s_c1_c_c_0_0.jpg') }}" width="100%" height="300px" alt="foto" >
+        <form action="/search" method="POST" role="search">
             {{ csrf_field() }}
             <div class="input-group">
               <label for="fname">Search by tags:</label>
                 <input type="text" class="form-control" name="q"
-                    placeholder="#brieftaking"> <span class="input-group-btn">
+                    placeholder="#3guests"> <span class="input-group-btn">
                     <button type="submit" class="btn btn-default">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
@@ -108,27 +110,29 @@ figure figcaption{
 </div>
 </div>
 </div>
-@if(isset($packages))
-        <p><center>The vacation packages for your query <b> {{ $query }} </b> are :</center></p>
-        <div class="input-group">
-        <td>Start Date: <input type="date" name="start_date" required min="{{ date("Y-m-d") }}"></td>
-        <td>End Date: <input type="date" name="end_date" required min="{{ date("Y-m-d") }}"></td>
-        <td> <input type="submit" value="Go!">  </td>
-        </div>
-@if (count($packages)==0)
-<p color='red'> Unfortunately, there are no vacation packages available for now!</p>
+@if(isset($details))
+  <p><center> The accommodations for your query <b> {{ $query }} </b> are :<center></p>
+  <div class="input-group">
+  <td>Start Date: <input type="date" name="start_date" required min="{{ date("d-m-y") }}"></td>
+  <td>End Date: <input type="date" name="end_date" required min="{{ date("d-m-y") }}"></td>
+  <td> <input type="submit" value="Go!">  </td>
+  </div>
+        @if (count($details)==0)
+<p color='red'> Unfortunately, there are no accommodations available for now!</p>
 @else
-@foreach ($packages as $vacation)
+@foreach ($details as $accommodation)
 <div class="gallery">
   <div class="zoom">
     <figure>
-    <figcaption>{{ $vacation->package_name }}</figcaption>
-    <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
-    <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
-  <button id="view" class="button"><span>View</span></button>
+    <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
+    <img src="{{ $accommodation->image }}" alt="accommodation_image" style="width:180px" style="height:90px">
+    <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
+    <button id="view" class="button"><span>View</span></button>
     </figure>
     </div>
 </div>
+<td>
+</td>
 @endforeach
 @endif
 </body>
