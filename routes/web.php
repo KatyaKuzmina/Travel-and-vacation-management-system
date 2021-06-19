@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\AccommodationReservationController;
 use App\Http\Controllers\VacationPackagesController;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
+use App\Models\AccommodationReservation;
 use App\Models\Accommodation;
 use App\Models\VacationPackages;
 
@@ -62,3 +64,11 @@ Route::any ( '/search2', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route::any('/search3',function(){
+  //  $start_date = Request::get ( 'start_date' );
+  //  $accommodations = AccommodationReservation:: where( 'start_date', 'LIKE', '%' . $start_date . '%' )->get();
+  //  if(count($accommodation) > 0)
+  //      return view('sdatesearch')->withDetails($accommodation)->withQuery ( $start_date );
+  //  else return view ('sdatesearch')->withMessage('No Details found. Try to search again !');
+//});
