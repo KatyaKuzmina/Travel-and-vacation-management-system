@@ -24,6 +24,7 @@ class CreateVacationPackagesTable extends Migration
             $table->decimal('package_price');
             $table->string('package_description',2000);
             $table->string('package_tags',2000);
+            $table->mediumText('image')->nullable();
         });
     }
 
