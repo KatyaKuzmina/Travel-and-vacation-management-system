@@ -19,11 +19,10 @@ class CreateVacationPackagesTable extends Migration
             $table->string('package_name',550);
             $table->string('package_city',50);
             $table->string('package_address',150);
-            $table->date('start_date');
-            $table->date('end_date');
             $table->decimal('package_price');
             $table->string('package_description',2000);
             $table->string('package_tags',2000);
+            $table->string('package_type',50);
             $table->mediumText('image')->nullable();
         });
     }

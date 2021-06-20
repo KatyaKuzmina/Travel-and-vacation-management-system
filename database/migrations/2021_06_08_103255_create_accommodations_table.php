@@ -22,6 +22,7 @@ class CreateAccommodationsTable extends Migration
             $table->decimal('accommodation_price');
             $table->string('accommodation_description',2000);
             $table->string('accommodation_tags',2000);
+            $table->string('accommodation_type',50);
             $table->mediumText('image')->nullable();
         });
     }
