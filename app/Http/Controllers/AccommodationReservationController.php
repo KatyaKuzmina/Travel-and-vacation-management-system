@@ -16,7 +16,7 @@ class AccommodationReservationController extends Controller
      */
     public function index()
     {
-        //
+        return view('accommodations');
     }
 
     /**
@@ -38,7 +38,7 @@ class AccommodationReservationController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-                    
+
                     'name' => 'required|string|min:2|max:29',
                     'middle_name' => 'required|string|min:2|max:29',
                     'surname' => 'required|string|min:2|max:29',
@@ -64,8 +64,8 @@ class AccommodationReservationController extends Controller
             $persona->save();
         }
         $lastperson = Persona::latest()->first()->id;
-        
-        
+
+
 
         return redirect('/allorders/'.Auth::user()->id);
     }
@@ -114,4 +114,6 @@ class AccommodationReservationController extends Controller
     {
         //
     }
+    public function records(Request $request)
+    {
 }

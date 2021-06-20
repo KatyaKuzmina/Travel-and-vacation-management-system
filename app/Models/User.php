@@ -40,7 +40,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function favaccommodationuser() { // FK relationship
             return $this->hasMany(FavAccommodations::class);
     }
@@ -48,7 +48,7 @@ class User extends Authenticatable
             return $this->hasMany(FavPackages::class);
     }
     public function accommodationreservationuser() { // FK relationship
-            return $this->hasMany(AccommodationReservation::class);
+            return $this->hasMany(AccommodationReservations::class);
     }
     public function accommodationfeedbackuser() { // FK relationship
             return $this->hasMany(AccommodationFeedback::class);
@@ -59,5 +59,5 @@ class User extends Authenticatable
     public function packagefeedbackuser() { // FK relationship
             return $this->hasMany(PackageFeedback::class);
     }
-    
+
 }

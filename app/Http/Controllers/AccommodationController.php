@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 use App\Models\Accommodation;
 use App\Models\AccommodationFeedback;
@@ -17,9 +17,8 @@ class AccommodationController extends Controller
      */
     public function index(request $request)
     {
-        $accommodations= Accommodation::all();
-        return view('accommodations',compact('accommodations'));
 
+        $accommodations= Accommodation::all();
 
         $user = Auth::user();
 
@@ -29,10 +28,9 @@ class AccommodationController extends Controller
         if($request->tmp==2) $accommodations = $accommodations->sortByDesc('accommodation_price');}
         else $request->tmp=0;
 
-       
-    }
-    
+        return view('accommodations',compact('accommodations'), array( 'tmp'=>$request->tmp));
 
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -52,8 +50,8 @@ class AccommodationController extends Controller
     public function store(Request $request)
     {
 
-    }
 
+}
     /**
      * Display the specified resource.
      *
@@ -97,15 +95,6 @@ class AccommodationController extends Controller
     public function destroy($id)
     {
         //
-    }
-    
-    public function welcometest() {
-        return view ('about');
-    }
-    
-    public function testing() {
-        $accommodationtest = Accommodation::all();
-        return View::make('accommodations', compact('accommodations'));
     }
 
 }
