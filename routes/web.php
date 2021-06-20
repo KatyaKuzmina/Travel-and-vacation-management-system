@@ -30,10 +30,11 @@ Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::cla
 //Route::redirect('/', 'accommodation');
 //Route::resource('accommodation', AccommodationController::class);
 //Auth::routes();
-Route::get('/', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
+
 Route::redirect('/', 'vacation');
 Route::resource('vacation', VacationPackagesController::class);
 Auth::routes();
+Route::get('/', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
