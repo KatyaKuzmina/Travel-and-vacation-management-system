@@ -88,53 +88,115 @@ figure figcaption{
   -webkit-transform: scale(1.01); /* Safari 3-8 */
   transform: scale(1.01);
 }
+.filter{
 
+  padding-top: 25px;
+}
+
+.table{
+  border-style: solid;
+  border-color: black;
+  background-color: #E0FFFF;
+}
+.sb{
+  background-color: red;
+  border-radius: 50%;
+  border-color: grey;
+  padding: 15px;
+  box-shadow: 0 3px #999;
+  text-align: center;
+  color: white;
+}
+.sb:hover {background-color: #3e8e41}
+
+.sb:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.filter{
+  font-size: 16px;
+}
+.tags{
+margin-left: 21%;
+padding-top: 30px;
+
+}
+#input{
+  padding-right: 410px;
+}
+#searchfor{
+  font-size:18px;
+}
 </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <img src="{{  url('https://www.hawaii-guide.com/images/made/kauai-accommodations_1_2100_750_85_s_c1_c_c_0_0.jpg') }}" width="100%" height="300px" alt="foto" >
+<div class="tags">
         <form action="/search" method="POST" role="search">
             {{ csrf_field() }}
             <div class="input-group">
-              <label for="fname">Search by tags:</label>
-                <input type="text" class="form-control" name="q"
-                    placeholder="#3guests"> <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
+              <label><b>Search by tags: </b></label>
+                <input id="input" type="text" name="p" placeholder="#3guests">
+              </div>
             </div>
         </form>
 </div>
-</div>
+<div class="filter">
+<table class="table">
+  <th style = "text-transform:uppercase;"><center>Filter box</center></th>
+  <tr><td>Location:
+    {!! Form::select('location', array('St' => 'Select...','B' => 'Bīriņi', 'S' => 'Saulkrasti', 'L' => 'Liepāja', 'LB' => 'Limbažu novads', 'SG' => 'Saulgoži', 'BP' => 'Brenguļu pagasts', 'Sig' => 'Sigulda', 'SN' => 'Salacgrīvas novads', 'V' => 'Vecžīguri', 'Vt' => 'Ventspils'), 'S'); !!}
+</td></tr>
+<form action="/search3" method="POST" role="search">
+      {{ csrf_field() }}
+<div class="input-group">
+<tr><td> Start Date: <input type="date" name="s"> </td></tr>
+<span class="input-group-btn">
+         <button type="submit" class="btn btn-default">
+             <span class="glyphicon glyphicon-search"></span>
+           </button>
+    </span>
+  </div>
+</form>
+<form action="/search5" method="POST" role="search">
+      {{ csrf_field() }}
+<div class="input-group">
+  <tr><td>Price:<input type="text" placeholder="30" name="aprice"></td></tr>
+  <span class="input-group-btn">
+           <button type="submit" class="btn btn-default">
+               <span class="glyphicon glyphicon-search"></span>
+             </button>
+      </span>
+    </div>
+  </form>
+  <tr><td>Accommodation type:
+    {!! Form::select('type', array('St' => 'Select...','R' => 'Residence', 'A' => 'Apartaments', 'H' => 'Hotel', 'Hs' => 'Homestays', 'BB' => 'Bed & Breakfasts'), 'S'); !!}
+</td></tr>
+  <td><center><input class="sb" type="submit" value="Search!"><center> </td></tr>
+  </table>
 </div>
 @if(isset($details))
-  <p><center> The accommodations for your query <b> {{ $query }} </b> are :<center></p>
-  <div class="input-group">
-  <td>Start Date: <input type="date" name="start_date" required min="{{ date("Y-m-d") }}"></td>
-  <td>End Date: <input type="date" name="end_date" required min="{{ date("Y-m-d") }}"></td>
-  <td> <input type="submit" value="Go!">  </td>
-  </div>
-        @if (count($details)==0)
+  <center><p id="searchfor"> The accommodations for your query <b> {{ $query }} </b> are :</p><center>
+    @if (count($details)==0)
 <p color='red'> Unfortunately, there are no accommodations available for now!</p>
 @else
 @foreach ($details as $accommodation)
 <div class="gallery">
   <div class="zoom">
-    <figure>
+  <tr><td>  <figure>
     <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
     <img src="{{ $accommodation->image }}" alt="accommodation_image" style="width:180px" style="height:90px">
     <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
     <button id="view" class="button"><span>View</span></button>
-    </figure>
+  </figure>
     </div>
 </div>
-<td>
-</td>
+
 @endforeach
-@endif
 </body>
+@endif
 @endif
 @endsection

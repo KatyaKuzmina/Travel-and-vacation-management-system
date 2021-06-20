@@ -87,36 +87,100 @@ figure figcaption{
   -webkit-transform: scale(1.01); /* Safari 3-8 */
   transform: scale(1.01);
 }
+.filter{
+
+  padding-top: 25px;
+}
+
+.table{
+  border-style: solid;
+  border-color: black;
+  background-color: #E0FFFF;
+}
+.sb{
+  background-color: red;
+  border-radius: 50%;
+  border-color: grey;
+  padding: 15px;
+  box-shadow: 0 3px #999;
+  text-align: center;
+  color: white;
+}
+.sb:hover {background-color: #3e8e41}
+
+.sb:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.filter{
+  font-size: 16px;
+}
+.tags{
+margin-left: 21%;
+padding-top: 30px;
+
+}
+#input{
+  padding-right: 410px;
+}
+#searchfor{
+  font-size:18px;
+}
 </style>
 </head>
 <body>
 <div class="container">
     <div class="row">
         <img src="{{  url('https://caaneo.ca/static/014ffa5eede1abe6478b9e1d111daff8/b1a36/f0d045d1-d77c-448b-8042-cee808ac0525_adobestock_158208243-min.jpg') }}" width="100%" height="300px" alt="foto" >
-        <form action="/search2" method="POST" role="search2">
-            {{ csrf_field() }}
-            <div class="input-group">
-              <label for="fname">Search by tags:</label>
-                <input type="text" class="form-control" name="q"
-                    placeholder="#brieftaking"> <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                </span>
-            </div>
-        </form>
-</div>
-</div>
-</div>
-@if(isset($packages))
-        <p><center>The vacation packages for your query <b> {{ $query }} </b> are :</center></p>
-        <div class="input-group">
-        <td>Start Date: <input type="date" name="start_date" required min="{{ date("Y-m-d") }}"></td>
-        <td>End Date: <input type="date" name="end_date" required min="{{ date("Y-m-d") }}"></td>
-        <td> <input type="submit" value="Go!">  </td>
+        <div class="tags">
+                <form action="/search2" method="POST" role="search">
+                    {{ csrf_field() }}
+                    <div class="input-group">
+                      <label><b>Search by tags: </b></label>
+                        <input id="input" type="text" name="q" placeholder="#brieftaking">
+                      </div>
+                    </div>
+                </form>
         </div>
+        <div class="filter">
+        <table class="table">
+          <th style = "text-transform:uppercase;"><center>Filter box</center></th>
+          <tr><td>Location:
+            {!! Form::select('location', array('St' => 'Select...','B' => 'Bīriņi', 'S' => 'Saulkrasti', 'L' => 'Liepāja', 'LB' => 'Limbažu novads', 'SG' => 'Saulgoži', 'BP' => 'Brenguļu pagasts', 'Sig' => 'Sigulda', 'SN' => 'Salacgrīvas novads', 'V' => 'Vecžīguri', 'Vt' => 'Ventspils'), 'S'); !!}
+        </td></tr>
+        <form action="/search4" method="POST" role="search">
+              {{ csrf_field() }}
+        <div class="input-group">
+        <tr><td>Date: <input type="date" name="date"> </td></tr>
+        <span class="input-group-btn">
+                 <button type="submit" class="btn btn-default">
+                     <span class="glyphicon glyphicon-search"></span>
+                   </button>
+            </span>
+          </div>
+        </form>
+        <form action="/search6" method="POST" role="search">
+              {{ csrf_field() }}
+        <div class="input-group">
+          <tr><td>Price:<input type="text" placeholder="30" name="vprice"></td></tr>
+          <span class="input-group-btn">
+                   <button type="submit" class="btn btn-default">
+                       <span class="glyphicon glyphicon-search"></span>
+                     </button>
+              </span>
+            </div>
+          </form>
+          <tr><td>Accommodation type:
+            {!! Form::select('type', array('St' => 'Select...','R' => 'Residence', 'A' => 'Apartaments', 'H' => 'Hotel', 'Hs' => 'Homestays', 'BB' => 'Bed & Breakfasts'), 'S'); !!}
+        </td></tr>
+          <td><center><input class="sb" type="submit" value="Search!"><center> </td></tr>
+          </table>
+        </div>
+@if(isset($packages))
+<center><p id="searchfor">The vacation packages for your query <b> {{ $query }} </b> are :</p><center>
 @if (count($packages)==0)
-<p color='red'> Unfortunately, there are no vacation packages available for now!</p>
+<center><p id="searchfor"> Unfortunately, there are no vacation packages available for now!</p><center>
 @else
 @foreach ($packages as $vacation)
 <div class="gallery">
@@ -130,7 +194,7 @@ figure figcaption{
     </div>
 </div>
 @endforeach
-@endif
 </body>
+@endif
 @endif
 @endsection
