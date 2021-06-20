@@ -120,23 +120,23 @@ figure figcaption{
         <div class="row">
                     <div class="col-sm">
                         <div class="card">
-                              <h1 class="list-group-item list-group-item-primary">Want to travel around the Latvia? We will help you.</h1>
+                              <h1 class="list-group-item list-group-item-primary">{{ __('messages.Want_to_travel_around_the_Latvia')}}? {{ __('messages.We_will_help_you')}}.</h1>
                                <div class="card-body">
                                    <form>
                                     <input type="button" value="Accommodation" onClick='location.href="/accommodation"'>
                                     <input type="button" value="Vacations" onClick='location.href="vacation"'>
                                     </form>
-                                   <p>Do not hesitate to call or e-mail us!<br>
+                                   <p>{{ __('messages.Do_not_hesitate_to_call_or_e-mail_us')}}!<br>
                                    </p>
                                    <br>
                                    <br>
-                                   <p>Address:  Brīvības iela 62, Vidzemes priekšpilsēta, Rīga, LV-1012 </p><br>
-                                   <p>E-mail: musuprojekts@gmail.com</p><br>
-                                   <p>Telefons: +371 20129697</p>
+                                   <p>{{ __('messages.Address')}}:  {{ __('messages.Brīvības_iela')}} 62, {{ __('messages.Vidzemes_priekšpilsēta')}}, {{ __('messages.Rīga')}}, LV-1012 </p><br>
+                                   <p>{{ __('messages.Email')}}: musuprojekts@gmail.com</p><br>
+                                   <p>{{ __('messages.Telefons')}}: +371 20129697</p>
                                 </div>
                         </div>
                     </div>
-                  
+
                     </div>
                 </div>
 

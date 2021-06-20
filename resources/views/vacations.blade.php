@@ -187,7 +187,7 @@ padding-top: 30px;
     <figcaption>{{ $vacation->package_name }}</figcaption>
     <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
     <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
-  <button id="view" class="button" onclick="showVacations({{ $vacation->id }})">><span>View</span></button>
+  <button id="view" class="button" onclick="showVacations({{ $vacation->id }})"><span>View</span></button>
     </figure>
     </div>
 </div>
