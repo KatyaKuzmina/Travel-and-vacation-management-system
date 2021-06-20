@@ -107,3 +107,8 @@ Route::any ( '/search6', function () {
 
 Route::get('accommodation/{id}/show', [AccommodationController::class, 'show']);
 Route::get('vacation/{id}/show', [VacationPackagesController::class, 'show']);
+
+Route::get('/{lang}', function ($lang) {
+    App::setlocale($lang);
+    return view('about');
+});
