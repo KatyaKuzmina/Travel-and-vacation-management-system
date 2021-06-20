@@ -103,3 +103,5 @@ Route::any ( '/search6', function () {
     else
         return view ( 'psearch' )->withMessage ( 'No Details found. Try to search again !' );
 } );
+
+Route::get('accommodation/{id}/show', [AccommodationController::class, 'show']);
