@@ -56,9 +56,10 @@ class VacationPackagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+   public function show($id)
     {
-        //
+        $vacations= VacationPackages::where('id', $id)->first();
+        return view('vacations_new',compact('vacations'));
     }
 
     /**
