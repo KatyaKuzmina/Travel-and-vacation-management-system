@@ -25,20 +25,12 @@ use App\Models\VacationPackages;
 
 
 Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::class, 'index'])->name('accommodation');
-
-//Route::redirect('/', 'accommodation');
-//Route::resource('accommodation', AccommodationController::class);
-//Auth::routes();
-
 Route::redirect('/', 'vacation');
 Route::resource('vacation', VacationPackagesController::class);
 Auth::routes();
-
+Route::get('/', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Route::get ( '/', function () {
-//    return view ( 'asearch' );
-//} );
 Route::any ( '/search', function () {
     $q = Request::get ( 'q' );
     $accommodation = Accommodation::where ( 'accommodation_tags', 'LIKE', '%' . $q . '%' )->get ();
@@ -48,10 +40,6 @@ Route::any ( '/search', function () {
         return view ( 'asearch' )->withMessage ( 'No accommodations found. Try to search again !' );
 } );
 
-
-//Route::get ( '/', function () {
-//    return view ( 'psearch' );
-//} );
 Route::any ( '/search2', function () {
     $q = Request::get ( 'q' );
     $vacation = VacationPackages::where ( 'package_tags', 'LIKE', '%' . $q . '%' )->get ();
@@ -64,7 +52,6 @@ Route::any ( '/search2', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 //Route::any('/search3',function(){
   //  $start_date = Request::get ( 'start_date' );
   //  $accommodations = AccommodationReservation:: where( 'start_date', 'LIKE', '%' . $start_date . '%' )->get();
