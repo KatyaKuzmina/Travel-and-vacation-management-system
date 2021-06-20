@@ -60,7 +60,8 @@ class AccommodationController extends Controller
      */
     public function show($id)
     {
-        //
+        $accommodations= Accommodation::all();
+        return view('accommodation_new',compact('accommodations'));
     }
 
     /**
