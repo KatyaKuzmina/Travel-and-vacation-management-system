@@ -22,7 +22,7 @@ body {
 
 #accommodation_name {
   color: white;
-  font-size: 40px;
+  font-size: 35px;
   padding: 0px 15% 0px 15%;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -59,18 +59,18 @@ body {
   margin-left: 5%;
   margin-right: 10%;
   color: black;
-  font-size: 20px;
+  font-size: 15px;
   text-align: justify;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 #h2 {
   margin-top: 20px;
+  font-size: 25px;
 }
 
 #tags {
   margin-left: 10%;
-  
   color: black;
   font-size: 20px;
   text-align: justify;
