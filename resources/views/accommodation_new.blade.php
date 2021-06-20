@@ -45,8 +45,6 @@ body {
   
 }
 
-
-
 #image {
   margin-top: 10%;
   margin-left: 10%;
