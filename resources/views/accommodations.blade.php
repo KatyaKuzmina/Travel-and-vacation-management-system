@@ -189,7 +189,7 @@ padding-top: 30px;
     <figcaption><b>{{ $accommodation->accommodation_name }}</b></figcaption>
     <img src="{{ $accommodation->image }}" alt="accommodation_image" style="width:180px" style="height:90px">
     <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-    <center><button id="view" class="button"><span>View</span></button></center>
+    <center><button id="view" class="button" onclick="showAccommodations({{ $accommodation->id }})"><span>View</span></button></center>
     </figure>
     </div>
 </div>
@@ -197,5 +197,10 @@ padding-top: 30px;
 </td>
 @endforeach
 @endif
+<script>
+    function showAccommodations(accommodationID) {
+        window.location.href="/accommodation/"+accommodationID+"/show";
+    }
+</script>
 </body>
 @endsection
