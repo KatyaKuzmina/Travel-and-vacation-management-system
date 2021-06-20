@@ -97,5 +97,14 @@ class AccommodationController extends Controller
     {
         //
     }
+    
+    public function welcometest() {
+        return view ('about');
+    }
+    
+    public function testing() {
+        $accommodationtest = Accommodation::all();
+        return View::make('accommodations', compact('accommodations'));
+    }
 
 }
