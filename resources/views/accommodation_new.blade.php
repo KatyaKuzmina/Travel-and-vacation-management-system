@@ -141,10 +141,12 @@ body {
           $loops = mysqli_query($link, "SELECT * FROM users") or die (mysqli_error($link));
           while ($rows = mysqli_fetch_array($loops)) {
             if ($row['user_id']==$rows['id']) {
-              echo "<u>". '<span style="font-size: 20px;">'. $rows['name']. '</span>'. "</u>". "<br/>";
-              echo "<br/>";
-              echo $row['feedback_description'] . "<br/>";
-              echo "<br/>";
+              if($row['feedback_description'] != Null){
+                echo "<u>". '<span style="font-size: 20px;">'. $rows['name']. '</span>'. "</u>". "<br/>";
+                echo "<br/>";
+                echo $row['feedback_description'] . "<br/>";
+                echo "<br/>";
+               }
             }
           } 
         }
