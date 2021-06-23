@@ -60,8 +60,10 @@ class AccommodationController extends Controller
      */
     public function show($id)
     {
-        $accommodations= Accommodation::where('id', $id)->first();
-        return view('accommodation_new',compact('accommodations'));
+        $accommodations=Accommodation::where('id', $id)->first();
+        $accommodation_feedback=AccommodationFeedback::where('accommodation_id', '=', $id)->first();
+        $users=User::where('id', $id)->first();
+        return view('accommodation_new',compact('accommodations', 'accommodation_feedback', 'users'));
     }
 
     /**
