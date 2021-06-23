@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\VacationPackages;
 use App\Models\PackageFeedback;
+use App\Models\User;
 
 
 class VacationPackagesController extends Controller
@@ -59,7 +60,9 @@ class VacationPackagesController extends Controller
    public function show($id)
     {
         $vacations= VacationPackages::where('id', $id)->first();
-        return view('vacations_new',compact('vacations'));
+        $packages_feedback=PackageFeedback::where('package_id', '=', $id)->first();
+        $users=User::where('id', $id)->first();
+        return view('vacations_new', compact('vacations', 'packages_feedback', 'users'));
     }
 
     /**
