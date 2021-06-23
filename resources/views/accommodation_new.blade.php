@@ -5,7 +5,6 @@
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 <head>
 <head>
-<title>New city</title>
 </head>
 <body>
 <style>
@@ -13,6 +12,7 @@ body {
   font-family: "Roboto", sans-serif;
   background-color: rgb(24, 62, 38);
 }
+
 .accommodation_name {
   background-color: rgb(24, 62, 38);
   display: flex;
@@ -36,13 +36,16 @@ body {
   float: left;
   width: 50%;
   padding: 10px;
-  
 }
+
 .column2 {
   float: left;
   width: 50%;
   padding: 10px;
-  
+}
+
+.column12 {
+  height: 100%;
 }
 
 #image {
@@ -64,8 +67,18 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
 #h2 {
   margin-top: 20px;
+  font-size: 25px;
+}
+
+#review {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  margin-left: 5%;
+  margin-right: 5%;
   font-size: 25px;
 }
 
@@ -81,14 +94,24 @@ body {
 .row {
   height: 100%;
 }
+
+.feedback {
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 20px 0% 0% 0%;
+  text-align: justify;
+}
 </style>
 
 <form method="POST" action="{{action([App\Http\Controllers\AccommodationController::class, 'show'],$accommodations->id ) }}">
 
 <br>
-<h3 id="accommodation_name">{{ $accommodations->accommodation_name }}</h3>
+<div>
+  <h3 id="accommodation_name">{{ $accommodations->accommodation_name }}</h3>
+</div>
 <br><br>
-<div class="row" style="background-color:white;">
+<div class="column12" style="background-color:#f2f0f8;">
+<br><br>
   <div class="column1" style="background-color:#f2f0f8;">
     <img id="image" src="{{ $accommodations->image }}" alt="accommodation_image">
     <p id="tags">{{ $accommodations->accommodation_tags }}</p>
@@ -105,7 +128,31 @@ body {
     <p id="description">{{ $accommodations->accommodation_price }} EUR</p>
   </div>
 </div>
-@csrf 
+<h2 id="review">Reviews</h2> 
+<div style="background-color:#f2f0f8;">
+  <div class="feedback" style="background-color:#f2f0f8;">
+    <?php
+      $link = mysqli_connect("127.0.0.1", "admin", "0000");
+      $link->set_charset("utf8mb4");
+      mysqli_select_db($link, "database");
+      $loop = mysqli_query($link, "SELECT * FROM accommodation_feedback") or die (mysqli_error($link));
+      while ($row = mysqli_fetch_array($loop)) {
+        if ($row['accommodation_id']==$accommodation_feedback->accommodation_id){
+          $loops = mysqli_query($link, "SELECT * FROM users") or die (mysqli_error($link));
+          while ($rows = mysqli_fetch_array($loops)) {
+            if ($row['user_id']==$rows['id']) {
+              echo "<u>". '<span style="font-size: 20px;">'. $rows['name']. '</span>'. "</u>". "<br/>";
+              echo "<br/>";
+              echo $row['feedback_description'] . "<br/>";
+              echo "<br/>";
+            }
+          } 
+        }
+      }
+      //printf("Current character set: %s\n", $link->character_set_name());
+    ?>
+  </div>
+</div>
 </form>
 </body>
 @endsection
