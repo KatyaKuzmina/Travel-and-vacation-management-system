@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Accommodation;
 use App\Models\AccommodationFeedback;
-
+use App\Models\User;
 
 class AccommodationController extends Controller
 {
