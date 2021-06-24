@@ -129,6 +129,10 @@ padding-top: 30px;
   font-size:18px;
 }
 </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -138,7 +142,7 @@ padding-top: 30px;
         <form action="/search" method="POST" role="search">
             {{ csrf_field() }}
             <div class="input-group">
-              <label><b>Search by tags: </b></label>
+              <label><b>{{ __('messages.Search_by_tags')}}: </b></label>
                 <input id="input" type="text" name="p" placeholder="#3guests">
               </div>
             </div>
@@ -146,25 +150,31 @@ padding-top: 30px;
 </div>
 <div class="filter">
 <table class="table">
-  <th style = "text-transform:uppercase;"><center>Filter box</center></th>
-  <tr><td>Location:
-    {!! Form::select('location', array('St' => 'Select...','B' => 'Bīriņi', 'S' => 'Saulkrasti', 'L' => 'Liepāja', 'LB' => 'Limbažu novads', 'SG' => 'Saulgoži', 'BP' => 'Brenguļu pagasts', 'Sig' => 'Sigulda', 'SN' => 'Salacgrīvas novads', 'V' => 'Vecžīguri', 'Vt' => 'Ventspils'), 'S'); !!}
+  <th style = "text-transform:uppercase;"><center>{{ __('messages.Filter_box')}}</center></th>
+  <tr><td>
+{!! Form::open(['action' => 'Search4Controller@index', 'method' => 'GET']) !!}
+  <div class = "form-group">
+    <span>{{ __('messages.Location')}}:</span>
+  <select id = "nameid" style="width:200px">
+    <option></option>
+</select>
+</div>
 </td></tr>
-<form action="/search3" method="POST" role="search">
-      {{ csrf_field() }}
-<div class="input-group">
-<tr><td> Start Date: <input type="date" name="s"> </td></tr>
-<span class="input-group-btn">
-         <button type="submit" class="btn btn-default">
-             <span class="glyphicon glyphicon-search"></span>
-           </button>
-    </span>
-  </div>
+  <form action="/search3" method="POST" role="search">
+        {{ csrf_field() }}
+  <div class="input-group">
+  <td>{{ __('messages.Start_Date')}}: <input type="date" name="s"> </td></tr>
+  <span class="input-group-btn">
+           <button type="submit" class="btn btn-default">
+               <span class="glyphicon glyphicon-search"></span>
+             </button>
+      </span>
+    </div>
 </form>
 <form action="/search5" method="POST" role="search">
       {{ csrf_field() }}
 <div class="input-group">
-  <tr><td>Price:<input type="text" placeholder="30" name="aprice"></td></tr>
+  <tr><td>{{ __('messages.Price')}}:<input type="text" placeholder="30" name="aprice"></td></tr>
   <span class="input-group-btn">
            <button type="submit" class="btn btn-default">
                <span class="glyphicon glyphicon-search"></span>
@@ -172,31 +182,56 @@ padding-top: 30px;
       </span>
     </div>
   </form>
-  <tr><td>Accommodation type:
-    {!! Form::select('type', array('St' => 'Select...','R' => 'Residence', 'A' => 'Apartaments', 'H' => 'Hotel', 'Hs' => 'Homestays', 'BB' => 'Bed & Breakfasts'), 'S'); !!}
-</td></tr>
-  <td><center><input class="sb" type="submit" value="Search!"><center> </td></tr>
+  <tr><td>{{ __('messages.Accommodation_type')}}:
+    <select id = "nameid1" style="width:200px">
+      <option></option>
+
+  </select>
+  </td></tr>
+  <td><center><div class="form-group">
+    {{ Form::Submit('submit', ['class' => 'btn btn-primary']) }}
+</div></center> </td></tr>
   </table>
 </div>
 @if(isset($details))
-  <center><p id="searchfor"> The accommodations for your query <b> {{ $query }} </b> are :</p><center>
+  <center><p id="searchfor"> {{ __('messages.The_accommodations_for_your_query')}} <b> {{ $query }} </b> {{ __('messages.are')}} :</p><center>
     @if (count($details)==0)
-<p color='red'> Unfortunately, there are no accommodations available for now!</p>
+<p color='red'> {{ __('messages.Unfortunately')}}!</p>
 @else
 @foreach ($details as $accommodation)
 <div class="gallery">
   <div class="zoom">
-  <tr><td>  <figure>
-    <figcaption>{{ $accommodation->accommodation_name }}</figcaption>
+    <figure>
+    <figcaption><b>{{ $accommodation->accommodation_name }}</b></figcaption>
     <img src="{{ $accommodation->image }}" alt="accommodation_image" style="width:180px" style="height:90px">
     <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
-    <button id="view" class="button"><span>View</span></button>
-  </figure>
+    <center><button id="view" class="button" onclick="showAccommodations({{ $accommodation->id }})"><span>{{ __('messages.View')}}</span></button></center>
+    </figure>
     </div>
 </div>
-
+<td>
+</td>
 @endforeach
-</body>
 @endif
+<script>
+    function showAccommodations(accommodationID) {
+        window.location.href="/accommodation/"+accommodationID+"/show";
+    }
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+
+      $("#nameid").select2({
+            placeholder: "Select a City",
+            allowClear: true
+        });
+
+      $("#nameid1").select2({
+              placeholder: "Select a Type",
+              allowClear: true
+          });
+</script>
+</body>
 @endif
 @endsection

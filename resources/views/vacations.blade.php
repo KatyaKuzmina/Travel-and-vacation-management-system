@@ -1,11 +1,19 @@
 @extends('layouts.app')
 @section('content')
+<a href="vacations.blade.php"></a>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
 <style>
 body{
-background-color: white;
+  background-color: #fff;
+                  color: #636b6f;
+                  font-family: 'Nunito', sans-serif;
+                  font-weight: 200;
+                  height: 100vh;
+                  margin: 0;
+                  box-sizing: border-box;
 
 }
 .gallery{
@@ -128,6 +136,10 @@ padding-top: 30px;
   font-size:18px;
 }
 </style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -137,7 +149,7 @@ padding-top: 30px;
                 <form action="/search2" method="POST" role="search">
                     {{ csrf_field() }}
                     <div class="input-group">
-                      <label><b>Search by tags: </b></label>
+                      <label><b>{{ __('messages.Search_by_tags')}}: </b></label>
                         <input id="input" type="text" name="q" placeholder="#brieftaking">
                       </div>
                     </div>
@@ -145,14 +157,23 @@ padding-top: 30px;
         </div>
         <div class="filter">
         <table class="table">
-          <th style = "text-transform:uppercase;"><center>Filter box</center></th>
-          <tr><td>Location:
-            {!! Form::select('location', array('St' => 'Select...','R' => 'Rīga', 'T' => 'Tukums', 'E' => 'Engures novads', 'K' => 'Krimuldas novads', 'J' => 'Jelgava', 'SP' => 'Salaspils'), 'S'); !!}
+          <th style = "text-transform:uppercase;"><center>{{ __('messages.Filter_box')}}</center></th>
+          <tr><td>
+        {!! Form::open(['action' => 'Search2Controller@index', 'method' => 'GET']) !!}
+          <div class = "form-group">
+            <span>{{ __('messages.Location')}}:</span>
+          <select id = "nameid" style="width:200px">
+            <option></option>
+            @foreach($vacations as $d)
+            <option>{{$d->package_city}}</option>
+            @endforeach
+        </select>
+        </div>
         </td></tr>
         <form action="/search4" method="POST" role="search">
               {{ csrf_field() }}
         <div class="input-group">
-        <tr><td> Date: <input type="date" name="date"> </td></tr>
+        <tr><td> {{ __('messages.Date')}} <input type="date" name="date"> </td></tr>
         <span class="input-group-btn">
                  <button type="submit" class="btn btn-default">
                      <span class="glyphicon glyphicon-search"></span>
@@ -163,7 +184,7 @@ padding-top: 30px;
         <form action="/search6" method="POST" role="search">
               {{ csrf_field() }}
         <div class="input-group">
-          <tr><td>Price:<input type="text" placeholder="30" name="vprice"></td></tr>
+          <tr><td>{{ __('messages.Price')}}:<input type="text" placeholder="30" name="vprice"></td></tr>
           <span class="input-group-btn">
                    <button type="submit" class="btn btn-default">
                        <span class="glyphicon glyphicon-search"></span>
@@ -171,10 +192,15 @@ padding-top: 30px;
               </span>
             </div>
           </form>
-          <tr><td>Package type:
-            {!! Form::select('type', array('St' => 'Select...','E' => 'Extreme', 'SP' => 'Sport and Activities', 'RS' => 'Relax and selfcare'), 'S'); !!}
+          <tr><td>{{ __('messages.Package_type')}}:
+            <select id = "nameid1" style="width:200px">
+              <option></option>
+              @foreach($vacations as $t)
+              <option>{{$t->package_type}}</option>
+              @endforeach
+          </select>
         </td></tr>
-          <td><center><input class="sb" type="submit" value="Search!"><center> </td></tr>
+          <td><center><input class="sb" type="submit" value="{{ __('messages.Search')}}!"><center> </td></tr>
           </table>
         </div>
         @if (count($vacations)==0)
@@ -187,7 +213,7 @@ padding-top: 30px;
     <figcaption>{{ $vacation->package_name }}</figcaption>
     <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
     <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
-  <button id="view" class="button" onclick="showVacations({{ $vacation->id }})"><span>View</span></button>
+  <center><button id="view" class="button" onclick="showVacations({{ $vacation->id }})"><span>{{ __('messages.View')}}</span></button></center>
     </figure>
     </div>
 </div>
@@ -198,5 +224,20 @@ padding-top: 30px;
         window.location.href="/vacation/"+vacationID+"/show";
     }
 </script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script type="text/javascript">
+
+      $("#nameid").select2({
+            placeholder: "Select a City",
+            allowClear: true
+        });
+
+        $("#nameid1").select2({
+              placeholder: "Select a Type",
+              allowClear: true
+          });
+</script>
+
 </body>
 @endsection

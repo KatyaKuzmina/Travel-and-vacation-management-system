@@ -137,7 +137,7 @@ padding-top: 30px;
                 <form action="/search2" method="POST" role="search">
                     {{ csrf_field() }}
                     <div class="input-group">
-                      <label><b>Search by tags: </b></label>
+                      <label><b>{{ __('messages.Search_by_tags')}}: </b></label>
                         <input id="input" type="text" name="q" placeholder="#brieftaking">
                       </div>
                     </div>
@@ -145,14 +145,20 @@ padding-top: 30px;
         </div>
         <div class="filter">
         <table class="table">
-          <th style = "text-transform:uppercase;"><center>Filter box</center></th>
-          <tr><td>Location:
-            {!! Form::select('location', array('St' => 'Select...','B' => 'Bīriņi', 'S' => 'Saulkrasti', 'L' => 'Liepāja', 'LB' => 'Limbažu novads', 'SG' => 'Saulgoži', 'BP' => 'Brenguļu pagasts', 'Sig' => 'Sigulda', 'SN' => 'Salacgrīvas novads', 'V' => 'Vecžīguri', 'Vt' => 'Ventspils'), 'S'); !!}
+          <th style = "text-transform:uppercase;"><center>{{ __('messages.Filter_box')}}</center></th>
+          <tr><td>
+        {!! Form::open(['action' => 'Search3Controller@index', 'method' => 'GET']) !!}
+          <div class = "form-group">
+            <span>{{ __('messages.Location')}}:</span>
+          <select id = "nameid" style="width:200px">
+            <option></option>
+        </select>
+        </div>
         </td></tr>
         <form action="/search4" method="POST" role="search">
               {{ csrf_field() }}
         <div class="input-group">
-        <tr><td>Date: <input type="date" name="date"> </td></tr>
+        <tr><td> {{ __('messages.Date')}} <input type="date" name="date"> </td></tr>
         <span class="input-group-btn">
                  <button type="submit" class="btn btn-default">
                      <span class="glyphicon glyphicon-search"></span>
@@ -163,7 +169,7 @@ padding-top: 30px;
         <form action="/search6" method="POST" role="search">
               {{ csrf_field() }}
         <div class="input-group">
-          <tr><td>Price:<input type="text" placeholder="30" name="vprice"></td></tr>
+          <tr><td>{{ __('messages.Price')}}:<input type="text" placeholder="30" name="vprice"></td></tr>
           <span class="input-group-btn">
                    <button type="submit" class="btn btn-default">
                        <span class="glyphicon glyphicon-search"></span>
@@ -171,14 +177,16 @@ padding-top: 30px;
               </span>
             </div>
           </form>
-          <tr><td>Accommodation type:
-            {!! Form::select('type', array('St' => 'Select...','R' => 'Residence', 'A' => 'Apartaments', 'H' => 'Hotel', 'Hs' => 'Homestays', 'BB' => 'Bed & Breakfasts'), 'S'); !!}
+          <tr><td>{{ __('messages.Package_type')}}:
+            <select id = "nameid1" style="width:200px">
+              <option></option>
+          </select>
         </td></tr>
-          <td><center><input class="sb" type="submit" value="Search!"><center> </td></tr>
+          <td><center><input class="sb" type="submit" value="{{ __('messages.Search')}}!"><center> </td></tr>
           </table>
         </div>
 @if(isset($packages))
-<center><p id="searchfor">The vacation packages for your query <b> {{ $query }} </b> are :</p><center>
+<center><p id="searchfor">{{ __('messages.The_packages_for_your_query')}} <b> {{ $query }} </b> {{ __('messages.are')}} :</p><center>
 @if (count($packages)==0)
 <center><p id="searchfor"> Unfortunately, there are no vacation packages available for now!</p><center>
 @else
@@ -189,12 +197,17 @@ padding-top: 30px;
     <figcaption>{{ $vacation->package_name }}</figcaption>
     <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
     <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
-  <button id="view" class="button"><span>View</span></button>
+  <center><button id="view" class="button" onclick="showVacations({{ $vacation->id }})"><span>{{ __('messages.View')}}</span></button></center>
     </figure>
     </div>
 </div>
 @endforeach
-</body>
 @endif
+<script>
+    function showVacations(vacationID) {
+        window.location.href="/vacation/"+vacationID+"/show";
+    }
+</script>
+</body>
 @endif
 @endsection
