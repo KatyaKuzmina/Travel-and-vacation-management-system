@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccommodationReservationController;
 use App\Http\Controllers\VacationPackagesController;
+use App\Http\Controllers\LanguageController;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
 use App\Models\AccommodationReservations;
@@ -34,8 +35,8 @@ Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::cla
 Route::redirect('/', 'vacation');
 Route::resource('vacation', VacationPackagesController::class);
 Auth::routes();
+Route::get('/about', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
 Route::get('/', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Route::get ( '/', function () {
@@ -69,7 +70,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::any ( '/search3', function () {
     $s = Request::get ('s');
-    $accommodation = AccommodationReservations::where ( 'start_date', 'LIKE', '%' . $s . '%' )->get ();
+    $accommodation = Accommodation::where ( 'start_date', 'LIKE', '%' . $s . '%' )->get ();
     if (count ( $accommodation ) > 0)
         return view ( 'asearch' )->withDetails ( $accommodation )->withQuery ( $s );
     else
@@ -79,7 +80,7 @@ Route::any ( '/search3', function () {
 
 Route::any ( '/search4', function () {
     $date = Request::get ('date');
-    $vacation = PackageRes::where ( 'date', 'LIKE', '%' . $date . '%' )->get ();
+    $vacation = VacationPackages::where ( 'date', 'LIKE', '%' . $date . '%' )->get ();
     if (count ( $vacation ) > 0)
         return view ( 'psearch' )->withPackages ( $vacation )->withQuery ( $date );
     else
@@ -108,7 +109,18 @@ Route::any ( '/search6', function () {
 Route::get('accommodation/{id}/show', [AccommodationController::class, 'show']);
 Route::get('vacation/{id}/show', [VacationPackagesController::class, 'show']);
 
-Route::get('/{lang}', function ($lang) {
-    App::setlocale($lang);
-    return view('about');
-});
+//Route::get('/{lang}', function ($lang) {
+    //App::setlocale($lang);
+  //  return view('about');
+//});
+
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('accommodations', 'SearchController');
+Route::resource('asearch', 'Search4Controller');
+Route::resource('psearch', 'Search3Controller');
+Route::resource('vacations', 'Search2Controller');
