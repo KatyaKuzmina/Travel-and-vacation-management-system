@@ -11,7 +11,7 @@ class SearchController extends Controller
     $accommodation= DB::table('accommodations')->select('accommodation_city')->distinct()->get()->pluck('accommodation')->sort();
     $accommodation= DB::table('accommodations')->select('accommodation_type')->distinct()->get()->pluck('accommodation')->sort();
 
-    return view('accommodations',compact('accommodations');
+    return view('accommodations',compact('accommodations'));
   }
 
 }
