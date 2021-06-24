@@ -42,6 +42,8 @@ class DatabaseSeeder extends Seeder
           'accommodation_description' => 'Šī vēsturiskā greznā viesnīca, kas celta 1860. gadā, atrodas pilī BĪrini Ezers krastā, 14 km attālumā no autoceļa E 67 un 15 km attālumā no Ledurgi dendrārija.',
           'accommodation_tags' => '#3guests #calmplace #waterfall #lake',
           'accommodation_type' => 'Residence',
+          'start_date' => '2021-07-05',
+          'end_date' => '2021-07-15',
           'image' => 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/150965774.jpg?k=4c687b922870ce4ac2108fff7933cb70cbb705a3949d67d3cd2eb3dd1749a261&o=&hp=1',
         ]);
 
@@ -53,6 +55,8 @@ class DatabaseSeeder extends Seeder
           'accommodation_description' => 'Esiet vienmēr gaidīti viesu namā „Pie Maijas”! Viesu nams ir iekārtots tā, lai atpūtniekiem piedāvātu mierīgu atpūtu un ļautu baudīt visas priekšsrocības.',
           'accommodation_tags' => '#2guests #sunnyspot #river',
           'accommodation_type' => 'Apartaments',
+          'start_date' => '2021-07-21',
+          'end_date' => '2021-07-24',
           'image' => 'https://cf.bstatic.com/images/hotel/max1024x768/475/47561092.jpg',
         ]);
        DB::table('accommodations')->insert([
@@ -63,6 +67,8 @@ class DatabaseSeeder extends Seeder
          'accommodation_description' => 'Dzīvoklis Barona atrodas Liepājā, 500 metru attālumā no Liepājas pludmales un 400 metru attālumā no Spoku koka. No logiem paveras skats uz pilsētu. Ir pieejams bezmaksas wifi.',
          'accommodation_tags' => '#2guests #sunnyspot #river',
          'accommodation_type' => 'Apartaments',
+         'start_date' => '2021-07-28',
+         'end_date' => '2021-07-29',
          'image' => 'https://cf.bstatic.com/xdata/images/hotel/max500/103737369.jpg?k=430b20a23112edd341f0154638fd62783e8e5f6b0c0086e1344319f6627d2ee3&o=&hp=1',
         ]);
         $accommodation = new Accommodation();
@@ -73,6 +79,8 @@ class DatabaseSeeder extends Seeder
         $accommodation->accommodation_description = '"Kundziņu salas" - vieta, kurā apstājas laiks un iespēja aizmirst ikdienas steigu un pilsētas kņadu! Lauku miers un klusums tikai stundas braucienā no Rīgas centra.';
         $accommodation->accommodation_tags = '#4guests #forest #calmplace';
         $accommodation->accommodation_type = 'Hotel';
+        $accommodation->start_date = '2021-08-24';
+        $accommodation->end_date = '2021-09-12';
         $accommodation->image = URL::asset('https://www.kundzinusalas.lv/uploads/s8dKNI5y/767x0_2560x0/kundzinu-salas-pirts-maja-zagatas-01.jpg');
         $accommodation->save();
 
@@ -84,6 +92,8 @@ class DatabaseSeeder extends Seeder
         $accommodation->accommodation_description = 'Piedāvājam 2 pirts mājas - Lielo pirti un Jauno pirti.Lielajā pirtī atrodas kamīnzāle kurā var ietilpināt līdz 60 personām. Vasarā iespējams lielāks cilvēku skaits.Jaunajā pirtī ietilps līdz 20 personām.';
         $accommodation->accommodation_tags = '#5guests #forest #calmplace #sea #beach #goodlocation';
         $accommodation->accommodation_type = 'Hotel';
+        $accommodation->start_date = '2021-07-24';
+        $accommodation->end_date = '2021-07-25';
         $accommodation->image = URL::asset('https://viesunamiem.lv/content/images/object/4794.jpg');
         $accommodation->save();
 
@@ -95,7 +105,9 @@ class DatabaseSeeder extends Seeder
         $accommodation->accommodation_description = 'Netālu no Valmieras, simtgadīgu ozolu ieskauta Abula upes krastā atrodas viesu nams "Jaundzērvītes".';
         $accommodation->accommodation_tags = '#forcouples #park #calmplace';
         $accommodation->accommodation_type = 'Hotel';
-        $accommodation->image = URL::asset('https://lh3.googleusercontent.com/proxy/iuAsftKsAZ5ji7n72IOob89t5W9jpA4RgYLJohXdEFC5q8tOk8xFIh6hsepT6_V1Otom3KgDkrgXu3libH2WzpSPNkqyrkT0cYU6xAxPufLMjnmedS9Dxpmx3Q');
+        $accommodation->start_date = '2021-06-30';
+        $accommodation->end_date = '2021-07-01';
+        $accommodation->image = URL::asset('https://lh3.googleusercontent.com/proxy/pwlxOic4rUMNkdGavu8t4GgIX4nEVGuqkpLAvXArX3dYdW68j7PiYghvGWoLharhSPtLEH4oMEFx3Vy9k1Mvg37CDfFam8cWfFWR_cjn2AKdZDlFeC9ullktGQ');
         $accommodation->save();
 
         $accommodation = new Accommodation();
@@ -106,6 +118,8 @@ class DatabaseSeeder extends Seeder
         $accommodation->accommodation_description = 'Viesu nama pirmajā stāvā atrodas ar malku kurināma pirts, svinību zāle ar kamīnu, labiekārtota virtuve silto un auksto ēdienu pagatavošanai.';
         $accommodation->accommodation_tags = '#6guests #party #smokingarea #goodlocation';
         $accommodation->accommodation_type = 'Hotel';
+        $accommodation->start_date = '2021-06-10';
+        $accommodation->end_date = '2021-06-12';
         $accommodation->image = URL::asset('https://viesunamiem.lv/content/images/object/56980.jpg');
         $accommodation->save();
 
@@ -117,6 +131,8 @@ class DatabaseSeeder extends Seeder
         $accommodation->accommodation_description = 'Viesu nams "Vecmuiža" ir viena no senākajām muižām Vidzemē un rakstos tā jau ir minēta 1403.g. Mēs atrodamies skaista meža ielokā, tikai 3 km attālumā no jūras.';
         $accommodation->accommodation_tags = '#1guest #calm #citycenter #goodlocation';
         $accommodation->accommodation_type = 'Homestays';
+        $accommodation->start_date = '2021-07-01';
+        $accommodation->end_date = '2021-07-05';
         $accommodation->image = URL::asset('https://viesunamiem.lv/content/images/object/54702.jpg');
         $accommodation->save();
 
@@ -128,6 +144,8 @@ class DatabaseSeeder extends Seeder
         $accommodation->accommodation_description = 'Viesu nams "Agave" un vasaras māja "Stallis" atrodas Līgatnes novadā (7 km no Augšlīgatnes). Skaistā, klusā, ainaviskā vietā. (Gaujas nacionālā parka teritorijā). Viesiem piedāvājām ērtus numuriņus, skaistu 100 m2 zāli (TV un mūzikas centru), labiekārtotu virtuvi, pirti, apkurināmu baļļu ar zemūdens masāžu un peldi dīķi kā arī vasaras sezonā (no maija līdz oktobrim) eko naktsmītnes - īsta lauku vasaras mājā "Stallis".';
         $accommodation->accommodation_tags = '#5guests #forest #calmplace';
         $accommodation->accommodation_type = 'Homestays';
+        $accommodation->start_date = '2021-07-24';
+        $accommodation->end_date = '2021-07-24';
         $accommodation->image = URL::asset('https://viesunamiem.lv/content/images/object/56048.jpg');
         $accommodation->save();
 
@@ -139,6 +157,8 @@ class DatabaseSeeder extends Seeder
           'accommodation_description' => 'Ne visiem zināms, ka ēka, kurā atrodas Zītaru krogs un viesu nams, ir senatnes elpas ieskauta. Mūra ēka Tirgus ielā 11 uzskatāma par vienu no vecākajiem namiem Ventspilī.',
           'accommodation_tags' => '#2guests #citycenter #sea',
           'accommodation_type' => 'Bed & Breakfasts',
+          'start_date' => '2021-07-12',
+          'end_date' => '2021-07-15',
           'image' => URL::asset('https://www.celotajs.lv/g/Accomm/Latvia/Kurzeme/668/IMG_9921.JPG?size=640'),
         ]);
         DB::table('vacation_packages')->insert([
@@ -149,6 +169,7 @@ class DatabaseSeeder extends Seeder
           'package_description' => 'Dodieties lidojuma piedzīvojumā virs Rīgas! Lidojuma maršrutu varēsiet izvēlēties paši, saskaņojot to ar pilotu. Prasmīgs un profesionāls pilots parūpēsies, lai no lidojuma Jūs gūtu tikai vislabākās emocijas. Izbaudiet neaizmirstamas sajūtas, kā arī novērtējiet iespaidīgos skatus no putna lidojuma. Pacelšanās virs Rīgas var būt gan romantiska dāvana pārim vai vienkāršs piedzīvojums ar draugiem. Izvēlies Tu!',
           'package_tags' => '#extreme #brieftaking',
           'package_type' => 'Extreme',
+          'date' => '2021-07-01',
           'image' => URL::asset('https://cdn.davanuserviss.lv/cache/images/861f1b2af8026eb5548d11ed9deee490.jpg'),
         ]);
 
@@ -160,6 +181,7 @@ class DatabaseSeeder extends Seeder
           'package_description' => 'Latvijas, jo mūsu valsts ir bagāta ar ūdens resursiem un jaunā atpūtas nodarbe iespējama gan pa ezeriem, gan upēm, gan jūru. Tas būs aizraujoši, veselīgi un neaizmirstami!',
           'package_tags' => '#active #wateractivity',
           'package_type' => 'Sport and Activities',
+          'date' => '2021-07-19',
           'image' => URL::asset('https://d2x6revg5j08bs.cloudfront.net/files/uploaded/programs/8020906020_71457e89f4_z_20171114162354973.jpeg'),
         ]);
 
@@ -171,6 +193,7 @@ class DatabaseSeeder extends Seeder
          'package_description' => 'Dodieties izbaudīt ūdens priekus, traucoties ar ūdensmotociklu! Sajūtiet brīvību un adrenalīnu! Brauciens ar ūdens motociklu ir ne tikai jautra vizināšanās pa viļņiem, bet arī elpu aizraujošs “lidojums” ar krietnu adrenalīna devu. Dāvini sauli, vēju, ūdens troksni un bezgalīgu horizontu – lūk, brīvības garša!',
          'package_tags' => '#2person #1person #active #ride #extreme',
          'package_type' => 'Sport and Activities',
+         'date' => '2021-06-15',
          'image' => URL::asset('https://cdn.davanuserviss.lv/public/photos/products/09/90/51/23492_photo_xl.jpg'),
         ]);
 
@@ -182,6 +205,7 @@ class DatabaseSeeder extends Seeder
           'package_description' => 'Šī procedūra palīdzēs Jums sajust vasaras atmosfēru jebkurā gada laikā! Vasaras elpa un eko-rituāla ārstejošais spēks dos Jums papildus enerģiju un uzlabos garastāvokli.',
           'package_tags' => '#relax #selfcare #spa',
           'package_type' => 'Relax and selfcare',
+          'date' => '2021-06-27',
           'image' => URL::asset('https://www.davanusala.lv/64489-large_default/vasarigais-pienenu-spa-rituals-salona-myspa-riga.jpg'),
          ]);
 
@@ -193,6 +217,7 @@ class DatabaseSeeder extends Seeder
            'package_description' => '„EscapeTown’’ 1942 ir aizraujoša komandas sadarbības spēle, kuras darbība norisinās vairākus hektārus lielā, 2.pasaules kara tematikā izveidotā spēles laukumā.',
            'package_tags' => '#braingame #game #teamgame',
            'package_type' => 'Sport and Activities',
+           'date' => '2021-06-30',
            'image' => URL::asset('https://www.davanusala.lv/64020-thickbox_default/aizraujoss-komandas-sadarbibas-kvests-dr-astonkajis-no-escape-town-1942.jpg'),
           ]);
 
@@ -204,6 +229,7 @@ class DatabaseSeeder extends Seeder
             'package_description' => 'Šajā stāstā jūsu bērni kļūs par laupītājiem! Un nevis vienkārši par laupītājiem, bet gan par mūkiem no slepenas biedrības. Nolaupīs viņi neko citu kā –Svēto Grālu. Vēsturiska piedzīvojumu spēle bērniem vecumā no 6-12 gadiem.',
             'package_tags' => '#braingame #game #teamgame #kids',
             'package_type' => 'Sport and Activities',
+            'date' => '2021-06-23',
             'image' => URL::asset('https://www.davanusala.lv/8906-thickbox_default/mysteria-kvestu-istaba-sveta-grala-nolaupisana.jpg'),
            ]);
            DB::table('vacation_packages')->insert([
@@ -214,6 +240,7 @@ class DatabaseSeeder extends Seeder
              'package_description' => 'Izbaudi pastaigu mākoņos, slīdot vienā solī ar vēju pāri koku galotnēm, kādā no Latvijas skaistākajām apskates vietām. Lidojuma laikā Jums būs iespēja piedzīvot neaprakstāmas emocijas un izbaudīt debesu burvību. Ļaujies neaizmirstamam piedzīvojumam, vērojot ikdienas dzīvi no augšas!',
              'package_tags' => '#beautifulview #brieftaking',
              'package_type' => 'Extreme',
+             'date' => '2021-06-30',
              'image' => URL::asset('https://d2x6revg5j08bs.cloudfront.net/files/uploaded/programs/6f8ff91f4db644748ab176a5f628c34d.jpeg'),
             ]);
             DB::table('vacation_packages')->insert([
@@ -224,6 +251,7 @@ class DatabaseSeeder extends Seeder
               'package_description' => 'Airsofts (airsoft) ir komandu sporta veids jeb militāras simulācijas spēle. Airsoft pamatā lieto kaujas ieroču kopijas, kas šauj ar 6mm plastmasas lodītēm. No airsoft šauteņu lodītēm neizdalās nekāda krāsa, tādēļ airsofts ir spēle uz godīgumu un katram tās dalībniekam pašam ir jākonstatē trāpījums.',
               'package_tags' => '#game #teamgame #airsoft',
               'package_type' => 'Sport and Activities',
+              'date' => '2021-07-14',
               'image' => URL::asset('https://www.fromme.lv/files/gifts/open_new/img_9891_1000x6663.jpg'),
              ]);
              DB::table('vacation_packages')->insert([
@@ -234,6 +262,7 @@ class DatabaseSeeder extends Seeder
                'package_description' => 'Šī pusotru stundu procedūra - patīkams veids kā padarīt Jūsu ādu skaistu un veselu, kā arī atpūsties un atslēgties no ikdienas problēmām. Masāža ar dabiskās šokolādes maskas izmantošanu tonizē, mitrina un baro ādu, un zemeņu skrubis lieliski attīra to! ',
                'package_tags' => '#spa #relax',
                'package_type' => 'Relax and selfcare',
+               'date' => '2021-06-23',
                'image' => URL::asset('https://www.davanusala.lv/64491-large_default/aromatiska-spa-procedura-sokolade-salona-myspa.jpg'),
               ]);
               DB::table('vacation_packages')->insert([
@@ -244,6 +273,7 @@ class DatabaseSeeder extends Seeder
                 'package_description' => 'Stipriniet imunitāti un izbaudiet sāls terapiju, kas izsenis ir zināma kā efektīva metode imunitātes stiprināšanai, jo tās īpašais mikroklimats rada iedarbību, kas pozitīvi ietekmē kā ķermeni, tā arī garu.',
                 'package_tags' => '#relax #drinks #2person',
                 'package_type' => 'Relax and selfcare',
+                'date' => '2021-07-05',
                 'image' => URL::asset('https://www.gribuatpusties.lv/uploads/offergroup/000/948/image2/pegasa-pils-spa-hotel-viesnicas-jurmala-1916.jpeg'),
                ]);
 

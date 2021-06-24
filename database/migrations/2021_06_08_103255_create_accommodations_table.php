@@ -23,6 +23,8 @@ class CreateAccommodationsTable extends Migration
             $table->string('accommodation_description',2000);
             $table->string('accommodation_tags',2000);
             $table->string('accommodation_type',50);
+            $table->date('start_date');
+            $table->date('end_date');
             $table->mediumText('image')->nullable();
         });
     }

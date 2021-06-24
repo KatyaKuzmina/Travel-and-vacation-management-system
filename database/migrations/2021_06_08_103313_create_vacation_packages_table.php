@@ -23,6 +23,7 @@ class CreateVacationPackagesTable extends Migration
             $table->string('package_description',2000);
             $table->string('package_tags',2000);
             $table->string('package_type',50);
+            $table->date('date');
             $table->mediumText('image')->nullable();
         });
     }
