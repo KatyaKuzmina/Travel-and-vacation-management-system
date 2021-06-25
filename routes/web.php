@@ -28,6 +28,8 @@ use App\Models\PackageRes;
 
 
 Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::class, 'index'])->name('accommodation');
+Route::get('/reservations', [\App\Http\Controllers\OrderController::class, 'orders']);
+Route::get('/reserveationcheck/{id?}', [\App\Http\Controllers\OrderController::class, 'create']);
 
 //Route::redirect('/', 'accommodation');
 //Route::resource('accommodation', AccommodationController::class);
