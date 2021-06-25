@@ -14,4 +14,8 @@ class PackageRes extends Model
     public function packageres() { // FK relationship
     return $this->belongsTo(VacationPackages::class);
  }
+ 
+  public function packagesorder(){
+     return $this->hasMany(VacationPackages::class, 'id');
+ }
 }
