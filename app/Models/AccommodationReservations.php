@@ -14,4 +14,8 @@ class AccommodationReservations extends Model
     public function accommodationres() { // FK relationship
     return $this->belongsTo(Accommodation::class);
  }
+ 
+ public function accommodationorder(){
+     return $this->hasMany(Accommodation::class, 'id');
+ }
 }
