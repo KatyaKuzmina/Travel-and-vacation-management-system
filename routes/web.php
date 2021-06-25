@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccommodationReservationController;
 use App\Http\Controllers\VacationPackagesController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\LanguageController;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
@@ -27,6 +28,8 @@ use App\Models\PackageRes;
 
 
 Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::class, 'index'])->name('accommodation');
+Route::get('/reservations', [\App\Http\Controllers\OrderController::class, 'orders']);
+Route::get('/reserveationcheck/{id?}', [\App\Http\Controllers\OrderController::class, 'create']);
 
 //Route::redirect('/', 'accommodation');
 //Route::resource('accommodation', AccommodationController::class);
@@ -121,6 +124,21 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('accommodations', 'SearchController');
-Route::resource('asearch', 'Search4Controller');
-Route::resource('psearch', 'Search3Controller');
+Route::resource('asearch', 'SearchController');
+Route::resource('psearch', 'Search2Controller');
 Route::resource('vacations', 'Search2Controller');
+
+
+
+Route::any ( '/search7', function () {
+    $vprice = Request::get ('vtype');
+    $vacation = VacationPackages::where ( 'package_type', 'LIKE', '%' . $vtype . '%' )->get ();
+    if (count ( $vacation ) > 0)
+        return view ( 'psearch' )->withPackages ( $vacation )->withQuery ( $vtype );
+    else
+        return view ( 'psearch' )->withMessage ( 'No Details found. Try to search again !' );
+} );
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
