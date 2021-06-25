@@ -28,8 +28,6 @@ use App\Models\PackageRes;
 
 
 Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::class, 'index'])->name('accommodation');
-Route::get('/reservations', [\App\Http\Controllers\OrderController::class, 'orders']);
-Route::get('/reservationcheck/{id?}', [\App\Http\Controllers\OrderController::class, 'create']);
 
 //Route::redirect('/', 'accommodation');
 //Route::resource('accommodation', AccommodationController::class);
@@ -55,9 +53,6 @@ Route::any ( '/search', function () {
 } );
 
 
-//Route::get ( '/', function () {
-//    return view ( 'psearch' );
-//} );
 Route::any ( '/search2', function () {
     $q = Request::get ( 'q' );
     $vacation = VacationPackages::where ( 'package_tags', 'LIKE', '%' . $q . '%' )->get ();
@@ -71,45 +66,42 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-Route::any ( '/search4', function () {
-    $date = Request::get ('date');
-    $vacation = VacationPackages::where ( 'date', 'LIKE', '%' . $date . '%' )->get ();
-    if (count ( $vacation ) > 0)
-        return view ( 'psearch' )->withPackages ( $vacation )->withQuery ( $date );
-    else
-        return view ( 'psearch' )->withMessage ( 'No Details found. Try to search again !' );
-} );
-
-Route::any ( '/search6', function () {
-    $vprice = Request::get ('vprice');
-    $vacation = VacationPackages::where ( 'package_price', 'LIKE', '%' . $vprice . '%' )->get ();
-    if (count ( $vacation ) > 0)
-        return view ( 'psearch' )->withPackages ( $vacation )->withQuery ( $vprice );
-    else
-        return view ( 'psearch' )->withMessage ( 'No Details found. Try to search again !' );
-} );
-
 Route::any ( '/search1', function () {
 
     $accommodation_type = Request::get ('accommodation_type');
     $aprice = Request::get ('aprice');
+    $location = Request::get ('location');
     $s = Request::get ('s');
     $e = Request::get ('e');
-    $location = Request::get ('location');
 
     $accommodation = Accommodation::where('accommodation_type', $accommodation_type)
-    ->orwhere('accommodation_price', 'LIKE', '%' . $aprice . '%')
-    ->orwhere('start_date', 'LIKE', '%' . $s . '%')
-    ->orwhere('end_date', 'LIKE', '%' . $e . '%')
-    ->orwhere('accommodation_city', $location)
+    ->where('accommodation_price', 'LIKE', '%' . $aprice . '%')
+    ->orwhere('accommodation_city',  $location)
+    ->where('start_date', 'LIKE', '%' . $s . '%')
+    ->where('end_date', 'LIKE', '%' . $e . '%')
     ->get();
       if (count ( $accommodation ) > 0)
-          return view ( 'asearch' )->withDetails ( $accommodation )->withQuery( $accommodation_type)->withQuery( $aprice)->withQuery( $s)->withQuery( $e)->withQuery( $location);
+          return view ( 'asearch' )->withDetails ( $accommodation )->withQuery( $accommodation_type)->withQuery( $aprice)->withQuery( $location)->withQuery( $s)->withQuery( $e);
       else
           return view ( 'asearch' )->withMessage ( 'No Details found. Try to search again !' );
 } );
+Route::any ( '/search3', function () {
 
+    $package_type = Request::get ('package_type');
+    $vprice = Request::get ('vprice');
+    $vlocation = Request::get ('vlocation');
+    $date = Request::get ('date');
+
+    $vacation = VacationPackages::where('package_type', $package_type)
+    ->where('package_price', 'LIKE', '%' . $vprice . '%')
+    ->where('package_city',  $vlocation)
+    ->where('date', 'LIKE', '%' . $date . '%')
+    ->get();
+      if (count ( $vacation ) > 0)
+          return view ( 'psearch' )->withPackages ( $vacation )->withQuery( $package_type)->withQuery( $vprice)->withQuery( $vlocation)->withQuery( $date);
+      else
+          return view ( 'psearch' )->withMessage ( 'No Details found. Try to search again !' );
+} );
 
 Route::get('accommodation/{id}/show', [AccommodationController::class, 'show']);
 Route::get('vacation/{id}/show', [VacationPackagesController::class, 'show']);
@@ -125,3 +117,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/reservations', [\App\Http\Controllers\OrderController::class, 'orders']);
+Route::get('/reservationcheck/{id?}', [\App\Http\Controllers\OrderController::class, 'create']);
