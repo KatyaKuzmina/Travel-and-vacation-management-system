@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 <a href="accommodations.blade.php"></a>
@@ -46,7 +47,6 @@ figure figcaption{
   margin-right: auto;
   width: 40%;
 }
-
 .button {
   border-radius: 4px;
   background-color: red;
@@ -60,14 +60,12 @@ figure figcaption{
   cursor: pointer;
   margin: 2px;
 }
-
 .button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.2s;
 }
-
 .button span:after {
   content: '\00bb';
   position: absolute;
@@ -76,11 +74,9 @@ figure figcaption{
   right: -10px;
   transition: 0.5s;
 }
-
 .button:hover span {
   padding-right: 15px;
 }
-
 .button:hover span:after {
   opacity: 1;
   right: 0;
@@ -89,16 +85,13 @@ figure figcaption{
   transition: transform .2s;
   margin: 0 auto;
 }
-
 .zoom:hover {
   -webkit-transform: scale(1.01); /* Safari 3-8 */
   transform: scale(1.01);
 }
 .filter{
-
   padding-top: 25px;
 }
-
 .table{
   border-style: solid;
   border-color: black;
@@ -114,7 +107,6 @@ figure figcaption{
   color: white;
 }
 .sb:hover {background-color: #3e8e41}
-
 .sb:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -126,7 +118,6 @@ figure figcaption{
 .tags{
 margin-left: 21%;
 padding-top: 30px;
-
 }
 #input{
   padding-right: 410px;
@@ -158,50 +149,65 @@ padding-top: 30px;
 <table class="table">
   <th style = "text-transform:uppercase;"><center>{{ __('messages.Filter_box')}}</center></th>
   <tr><td>
-{!! Form::open(['action' => 'SearchController@index', 'method' => 'GET']) !!}
-  <div class = "form-group">
-    <span>{{ __('messages.Location')}}:</span>
-  <select id = "nameid" style="width:200px">
-    <option></option>
-    @foreach($accommodations as $d)
-    <option>{{$d->accommodation_city}}</option>
-    @endforeach
-</select>
-</div>
+    <form action="/search1" method="POST" role="search">
+       {{ csrf_field() }}
+       <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+       <div class="form-group">
+         <span>{{ __('messages.Location')}}:<span>
+          <select class="selectpicker search-fields" name="location">
+            <option value=""></option>
+             <option value="BД«riЕ†i"> BД«riЕ†i </option>
+             <option value="Saulkrasti"> Saulkrasti</option>
+             <option value="LiepДЃja"> LiepДЃja </option>
+             <option value="LimbaЕѕu novads"> LimbaЕѕu novads </option>
+             <option value="SaulgoЕѕi"> SaulgoЕѕi </option>
+             <option value="SaulgoЕѕi"> Sigulda </option>
+             <option value="BrenguДјu pagasts"> BrenguДјu pagasts </option>
+             <option value="SalacgrД«vas novads"> SalacgrД«vas novads </option>
+             <option value="VecЕѕД«guri"> VecЕѕД«guri </option>
+             <option value="Ventspils"> Ventspils </option>
+          </select>
+       </div>
+    </div>
 </td></tr>
-  <form action="/search3" method="POST" role="search">
-        {{ csrf_field() }}
   <div class="input-group">
-  <td>{{ __('messages.Start_Date')}}: <input type="date" name="s"> </td></tr>
+  <tr><td>{{ __('messages.Start_Date')}}: <input type="date" name="s"> </td></tr>
   <span class="input-group-btn">
-           <button type="submit" class="btn btn-default">
-               <span class="glyphicon glyphicon-search"></span>
-             </button>
       </span>
     </div>
-</form>
-<form action="/search5" method="POST" role="search">
-      {{ csrf_field() }}
+    <div class="input-group">
+<tr><td>{{ __('messages.Start_Date')}}: <input type="date" name="e"> </td></tr>
+    <span class="input-group-btn">
+        </span>
+      </div>
 <div class="input-group">
   <tr><td>{{ __('messages.Price')}}:<input type="text" placeholder="30" name="aprice"></td></tr>
   <span class="input-group-btn">
-           <button type="submit" class="btn btn-default">
-               <span class="glyphicon glyphicon-search"></span>
-             </button>
       </span>
     </div>
-  </form>
   <tr><td>{{ __('messages.Accommodation_type')}}:
-    <select id = "nameid1" style="width:200px">
-      <option></option>
-      @foreach($accommodations as $t)
-      <option>{{$t->accommodation_type}}</option>
-      @endforeach
-  </select>
-</td></tr>
-  <td><center><div class="form-group">
-    {{ Form::Submit('submit', ['class' => 'btn btn-primary']) }}
-</div></center> </td></tr>
+          <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+             <div class="form-group">
+                <select class="selectpicker search-fields" name="accommodation_type">
+                  <option value=""></option>
+                   <option value="Hotel"> Hotel </option>
+                   <option value="Apartments"> Apartments </option>
+                   <option value="Bed & Breakfasts"> Bed & Breakfasts </option>
+                   <option value="Homestays"> Homestays </option>
+                   <option value="Residence"> Residence </option>
+                </select>
+             </div>
+          </div>
+        </tr></td>
+       <div class="row p-3">
+          <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+             <div class="form-group">
+                <td><center><button class="search-button">Search</button></div></center>
+             </div>
+          </div>
+       </div>
+    </form>
   </table>
 </div>
         @if (count($accommodations)==0)
@@ -231,12 +237,10 @@ padding-top: 30px;
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script type="text/javascript">
-
       $("#nameid").select2({
             placeholder: "Select a City",
             allowClear: true
         });
-
         $("#nameid1").select2({
               placeholder: "Select a Type",
               allowClear: true
