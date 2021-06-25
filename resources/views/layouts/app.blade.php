@@ -41,7 +41,10 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                      <li class="nav-item dropdown">
+                        @if (Auth::check())
+                        <li><a class="nav-link" href="{{ url('/reservations') }}">{{ __('messages.Reservations')}} </a></li>   
+                        @endif
+                      <li class="nav-item dropdown">               
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
         </a>
