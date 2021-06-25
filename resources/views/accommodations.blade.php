@@ -215,6 +215,7 @@ padding-top: 30px;
     <img src="{{ $accommodation->image }}" alt="accommodation_image" style="width:180px" style="height:90px">
     <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
     <center><button id="view" class="button" onclick="showAccommodations({{ $accommodation->id }})"><span>{{ __('messages.View')}}</span></button></center>
+    <center><a type="button" class="button" id='create_order'  href="{{ action([\App\Http\Controllers\OrderController::class, 'create'], $accommodation->id)}}"> {{ __('messages.Reserve') }} </a></center>
     </figure>
     </div>
 </div>
