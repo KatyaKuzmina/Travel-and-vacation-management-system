@@ -8,6 +8,7 @@ use App\Http\Controllers\AccommodationReservationController;
 use App\Http\Controllers\VacationPackagesController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\FavouriteController;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
 use App\Models\AccommodationReservations;
@@ -125,8 +126,14 @@ Route::get('/reservationcheck/{id?}', [\App\Http\Controllers\OrderController::cl
 //liking accommodation
     Route::get('accommodation/{id}/like', [AccommodationController::class, 'like']);
 
+//delete accommodation
+    Route::get('accommodation/{id}/delete', [AccommodationController::class, 'delete']);
+
 //liking vacations
     Route::get('vacation/{id}/like', [VacationPackagesController::class, 'like']);
+
+//delete vacations
+Route::get('vacation/{id}/delete', [VacationPackagesController::class, 'delete']);
     
 //showing favourites
 Route::get('/favourites', [\App\Http\Controllers\FavouriteController::class, 'index'])->name('favourites');
