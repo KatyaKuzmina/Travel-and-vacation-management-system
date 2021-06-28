@@ -1,20 +1,19 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Persona;
 use App\Models\AccommodationReservations;
 use App\Models\PackageRes;
 use App\Models\Accommodation;
 use App\Models\VacationPackages;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Personas;
 
-class OrderController extends Controller
+class OrderPackController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,26 +30,18 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id=null)
+    public function create($id = null)
     {
-        $accommodation=Accommodation::where('id', $id)->first();
+        
+        $vacation=VacationPackages::where('id', $id)->first();
         if (Auth::check()) {
                
-                return view('order_create', compact('accommodation'));
+                return view('order_create_pack', compact('vacation'));
                
             }
         else {
             return redirect ('/login');
-        }   
-    }
-    
-    public function orders() {
-        $orders = AccommodationReservations::with('accommodationorder')->join('accommodations', 'accommodations.id', '=', 'accommodation_reservations.accommodation_id')->where('user_id', Auth::user()->id)->get()->toArray();
-        $orderspackage = PackageRes::with('packagesorder')->join('vacation_packages', 'vacation_packages.id', '=', 'package_res.package_id')->where('user_id', Auth::user()->id)->get()->toArray();
-//        $orders = AccommodationReservations::where('user_id', Auth::User()->id)->get()->ToArray();
-//        dd($orders); die;
-//        $packageorders = PackageRes::with('packagesorder')->where('user_id', Auth::user()->id)->get()->toArray();
-        return view('orders')->with(compact('orders', 'orderspackage'));
+        }
     }
 
     /**
@@ -70,16 +61,15 @@ class OrderController extends Controller
         $persona->user_id = Auth::user()->id;
         $persona->Vards=$request->name;
         $persona->save();
+        $vacation = new PackageRes();
+        $vacation->user_id = Auth::user()->id;
+        $vacation->package_id = $request->veids;
+        $vacation->save();
         
-       $accommodation = new AccommodationReservations();
-        $accommodation->user_id = Auth::user()->id;
-        $accommodation->accommodation_id = $request->veids;
-        $accommodation->save();
-
 
         return redirect('/reservations');
     }
-    
+
     /**
      * Display the specified resource.
      *
