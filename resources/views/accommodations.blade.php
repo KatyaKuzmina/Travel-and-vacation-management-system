@@ -1,11 +1,12 @@
-
 @extends('layouts.app')
 @section('content')
 <a href="accommodations.blade.php"></a>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="lv">
 <head>
+    <meta charset="utf-8">
 <style>
 body{
   background-color: #fff;
@@ -98,13 +99,17 @@ figure figcaption{
   background-color: #E0FFFF;
 }
 .sb{
+  border-radius: 4px;
   background-color: red;
-  border-radius: 50%;
-  border-color: grey;
-  padding: 15px;
-  box-shadow: 0 3px #999;
-  text-align: center;
+  border: none;
   color: white;
+  text-align: center;
+  width: 10%;
+  font-size: 15px;
+  padding: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 2px;
 }
 .sb:hover {background-color: #3e8e41}
 .sb:active {
@@ -126,10 +131,6 @@ padding-top: 30px;
   font-size:18px;
 }
 </style>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -141,6 +142,7 @@ padding-top: 30px;
             <div class="input-group">
               <label><b>{{ __('messages.Search_by_tags')}}: </b></label>
                 <input id="input" type="text" name="p" placeholder="#3guests">
+                <button style="background-color: red; color:white">Go!</button>
               </div>
             </div>
         </form>
@@ -148,36 +150,34 @@ padding-top: 30px;
 <div class="filter">
 <table class="table">
   <th style = "text-transform:uppercase;"><center>{{ __('messages.Filter_box')}}</center></th>
-  <tr><td>
-    <form action="/search1" method="POST" role="search">
-       {{ csrf_field() }}
+  <form action="/search1" method="POST" role="search">
+     {{ csrf_field() }}
+  <tr><td> {{ __('messages.Location')}}:
        <div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-       <div class="form-group">
-         <span>{{ __('messages.Location')}}:<span>
-          <select class="selectpicker search-fields" name="location">
-            <option value=""></option>
-             <option value="BД«riЕ†i"> BД«riЕ†i </option>
+         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+            <div class="form-group">
+               <select class="selectpicker search-fields" name="location">
+              <option value=""></option>
+             <option value="Bīriņi"> Bīriņi </option>
              <option value="Saulkrasti"> Saulkrasti</option>
-             <option value="LiepДЃja"> LiepДЃja </option>
-             <option value="LimbaЕѕu novads"> LimbaЕѕu novads </option>
-             <option value="SaulgoЕѕi"> SaulgoЕѕi </option>
-             <option value="SaulgoЕѕi"> Sigulda </option>
-             <option value="BrenguДјu pagasts"> BrenguДјu pagasts </option>
-             <option value="SalacgrД«vas novads"> SalacgrД«vas novads </option>
-             <option value="VecЕѕД«guri"> VecЕѕД«guri </option>
+             <option value="Liepāja"> Liepāja </option>
+             <option value="Limbažu novads"> Limbažu novads </option>
+             <option value="Saulgoži"> Saulgoži </option>
+             <option value="Sigulda"> Sigulda </option>
+             <option value="Brenguļu pagasts"> Brenguļu pagasts </option>
+             <option value="Salacgrīvas novads"> Salacgrīvas novads </option>
+             <option value="Vecžīguri"> Vecžīguri </option>
              <option value="Ventspils"> Ventspils </option>
           </select>
        </div>
     </div>
 </td></tr>
   <div class="input-group">
-  <tr><td>{{ __('messages.Start_Date')}}: <input type="date" name="s"> </td></tr>
-  <span class="input-group-btn">
-      </span>
+  <tr><td>{{ __('messages.Start_Date')}}: <input type="date" name="s"></button></td></tr>
+  <span class="input-group-btn"></span>
     </div>
     <div class="input-group">
-<tr><td>{{ __('messages.Start_Date')}}: <input type="date" name="e"> </td></tr>
+<tr><td>{{ __('messages.End_Date')}}: <input type="date" name="e"> </td></tr>
     <span class="input-group-btn">
         </span>
       </div>
@@ -203,7 +203,7 @@ padding-top: 30px;
        <div class="row p-3">
           <div class="col-lg-12 col-md-12 col-sm-6 col-12">
              <div class="form-group">
-                <td><center><button class="search-button">Search</button></div></center>
+                <td><center><button class="sb" class="search-button">{{ __('messages.Search')}}</button></div></center>
              </div>
           </div>
        </div>
@@ -222,6 +222,50 @@ padding-top: 30px;
     <figcaption>{{ $accommodation->accommodation_price }}<p>EUR</p></figcaption>
     <center><button id="view" class="button" onclick="showAccommodations({{ $accommodation->id }})"><span>{{ __('messages.View')}}</span></button></center>
     <center><a type="button" class="button" id='create_order'  href="{{ action([\App\Http\Controllers\OrderController::class, 'create'], $accommodation->id)}}"> {{ __('messages.Reserve') }} </a></center>
+<?php
+  $userid = Auth::id();
+  $count = 0;
+  $zero = 0;
+  if (Auth::check()){
+    $link = mysqli_connect("127.0.0.1", "admin", "0000");
+    $link->set_charset("utf8mb4");
+    mysqli_select_db($link, "database");
+    $loop = mysqli_query($link, "SELECT * FROM fav_accommodations WHERE user_id=$userid") or die (mysqli_error($link));
+    while ($row = mysqli_fetch_array($loop)) {
+      $r = $row['accommodation_id'];
+      $a = $accommodation->id;
+      $one = 1;
+      $zero = 0;
+      if ($r == $a){
+        $count = $count + $one;
+      } 
+    }
+    if ($count == $zero){
+?>
+  <center><button id="view" class="button" onclick="newLike({{ $accommodation->id }})"><span>{{ __('messages.Like')}}</span></button></center>
+  <script>
+    function newLike(accommodationID) {
+    window.location.href="/accommodation/"+accommodationID+"/like";
+    }
+  </script>
+<?php
+    }
+    else{    
+?>
+<?php
+    }  
+  }
+  else { 
+?>
+  <center><button id="view" class="button" onclick="newLike({{ $accommodation->id }})"><span>{{ __('messages.Like')}}</span></button></center>
+  <script>
+    function newLike(accommodationID) {
+      window.location.href="/login/";
+    }
+  </script>
+<?php
+  }
+?>
     </figure>
     </div>
 </div>
@@ -234,18 +278,5 @@ padding-top: 30px;
         window.location.href="/accommodation/"+accommodationID+"/show";
     }
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-<script type="text/javascript">
-      $("#nameid").select2({
-            placeholder: "Select a City",
-            allowClear: true
-        });
-        $("#nameid1").select2({
-              placeholder: "Select a Type",
-              allowClear: true
-          });
-</script>
-
 </body>
 @endsection
