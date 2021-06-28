@@ -64,7 +64,22 @@ class VacationPackagesController extends Controller
         $users=User::where('id', $id)->first();
         return view('vacations_new', compact('vacations', 'packages_feedback', 'users'));
     }
+    
+    public function like($id)
+    {
+        $vacations= VacationPackages::where('id', $id)->first();
+        $packages_feedback=PackageFeedback::where('package_id', '=', $id)->first();
+        $users=User::where('id', $id)->first();
+        return view('vacfavourites', compact('vacations', 'packages_feedback', 'users'));
+    }
 
+    public function delete($id)
+    {
+        $vacations= VacationPackages::where('id', $id)->first();
+        $packages_feedback=PackageFeedback::where('package_id', '=', $id)->first();
+        $users=User::where('id', $id)->first();
+        return view('vacdelete', compact('vacations', 'packages_feedback', 'users'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
