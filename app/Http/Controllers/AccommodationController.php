@@ -38,7 +38,7 @@ class AccommodationController extends Controller
      */
     public function create()
     {
-        return view('accommodations.create');
+        //
     }
 
     /**
@@ -48,33 +48,11 @@ class AccommodationController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    /** 
-    *public function store(Request $request)
-    *{
-     *   $accommodation_feedback = new AccommodationFeedback();
-      *  $accommodation_feedback->accommodation_id=$request->accommodation_id;
-       * $accommodation_feedback->user_id=$request->user_id;
-        *$accommodation_feedback->feedback_description=$request->feedback_description;
-        *$accommodation_feedback->save();
-        *return redirect('accommodation/'.*$accommodation_feedback->accommodation_id.'/show');   
-
-*} */
-public function store(Request $request)
+     
+    public function store(Request $request)
     {
-    	$request->validate([
-            'title'=>'required',
-            'body'=>'required',
-        ]);
-    
-        Accommodation::create($request->all());
-    
-        return redirect()->route('accommodations.index');
-    }
-    public function shows($id)
-    {
-    	$post = Accommodation::find($id);
-        return view('accommodations.shows', compact('accommodation'));
-    }
+      //
+    } 
 
     /**
      * Display the specified resource.
