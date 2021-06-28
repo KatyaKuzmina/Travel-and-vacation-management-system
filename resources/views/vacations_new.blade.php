@@ -89,6 +89,76 @@ body {
   padding: 20px 0% 0% 0%;
   text-align: justify;
 }
+
+.star {
+  position: relative;
+  
+  display: inline-block;
+  width: 0;
+  height: 0;
+  
+  margin-left: .9em;
+  margin-right: .9em;
+  margin-bottom: 0.55em;
+  
+  border-right:  .3em solid transparent;
+  border-bottom: .7em  solid #FC0;
+  border-left:   .3em solid transparent;
+
+  /* Controlls the size of the stars. */
+  font-size: 24px;
+}
+  .star:before{
+    content: '';
+    
+    display: block;
+    width: 0;
+    height: 0;
+    
+    position: absolute;
+    top: .6em;
+    left: -1em;
+  
+    border-right:  1em solid transparent;
+    border-bottom: .7em  solid #FC0;
+    border-left:   1em solid transparent;
+  
+    transform: rotate(-35deg);
+  }
+  .star:after {
+  content: '';
+    
+    display: block;
+    width: 0;
+    height: 0;
+    
+    position: absolute;
+    top: .6em;
+    left: -1em;
+  
+    border-right:  1em solid transparent;
+    border-bottom: .7em  solid #FC0;
+    border-left:   1em solid transparent;
+  
+    transform: rotate(-35deg);
+  }
+  .star:after {  
+    transform: rotate(35deg);
+  }
+
+  #desc1{
+background-color: none; /* Green */
+  border-style: solid;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  margin: 10px 0px 10px 0px;
+  border-radius: 20px;
+
+}
 </style>
 
 <form method="POST" action="{{action([App\Http\Controllers\VacationPackagesController::class, 'show'],$vacations->id ) }}">
@@ -111,6 +181,33 @@ body {
     <p id="description">{{ $vacations->package_type }}</p>
     <h2 id="h2">{{ __('messages.Price')}}</h2>
     <p id="description">{{ $vacations->package_price }} EUR</p>
+    <h2 id="h2">{{ __('messages.Rating')}}</h2>
+    <?php
+    $link = mysqli_connect("127.0.0.1", "admin", "0000");
+      $link->set_charset("utf8mb4");
+      mysqli_select_db($link, "database");
+      $loop = mysqli_query($link, "SELECT * FROM package_feedback") or die (mysqli_error($link));
+      $rating = 0;
+      $numb = 0;
+      $people = 0;
+      while ($row = mysqli_fetch_array($loop)) {
+        if ($row['package_id']==$vacations->id){
+          $numb = $row['rate'];
+          $rating = $rating + $numb;
+          $people = $people +1;
+        }
+      }
+      if ($people != 0){
+      $rating = $rating/$people;
+      $rating=(round($rating, 1));
+      }
+      else{
+        $rating = 0;
+        $people = 0;
+      }
+    ?>
+      <i class="star"></i>
+    <p id="desc1"><b>{{ $rating }} ({{ __('messages.People_voted' )}}:  {{ $people }}) </b></p>
   </div>
 </div>
 <h2 id="review">{{ __('messages.Reviews')}}</h2>
@@ -122,7 +219,7 @@ body {
       mysqli_select_db($link, "database");
       $loop = mysqli_query($link, "SELECT * FROM package_feedback") or die (mysqli_error($link));
       while ($row = mysqli_fetch_array($loop)) {
-        if ($row['package_id']==$packages_feedback->package_id){
+        if ($row['package_id']==$vacations->id){
           $loops = mysqli_query($link, "SELECT * FROM users") or die (mysqli_error($link));
           while ($rows = mysqli_fetch_array($loops)) {
             if ($row['user_id']==$rows['id']) {
