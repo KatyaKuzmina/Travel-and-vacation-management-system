@@ -70,4 +70,7 @@ return [
     'desc8' => 'Airsofts (airsoft) ir komandu sporta veids jeb militāras simulācijas spēle. Airsoft pamatā lieto kaujas ieroču kopijas, kas šauj ar 6mm plastmasas lodītēm. No airsoft šauteņu lodītēm neizdalās nekāda krāsa, tādēļ airsofts ir spēle uz godīgumu un katram tās dalībniekam pašam ir jākonstatē trāpījums.',
     'desc9' => 'Šī pusotru stundu procedūra - patīkams veids kā padarīt Jūsu ādu skaistu un veselu, kā arī atpūsties un atslēgties no ikdienas problēmām. Masāža ar dabiskās šokolādes maskas izmantošanu tonizē, mitrina un baro ādu, un zemeņu skrubis lieliski attīra to!',
     'desc10' => 'Stipriniet imunitāti un izbaudiet sāls terapiju, kas izsenis ir zināma kā efektīva metode imunitātes stiprināšanai, jo tās īpašais mikroklimats rada iedarbību, kas pozitīvi ietekmē kā ķermeni, tā arī garu.',
+    'Like' => 'Patīk',
+    'Favourites' => 'Favorīti',
+    'Delete' => 'Dzēst',
 ];
