@@ -34,6 +34,9 @@
                       <li><a class="nav-link" href="{{ url('/about') }}">{{ __('messages.About')}}</a></li>
                         <li><a class="nav-link" href="{{ url('/accommodation') }}">{{ __('messages.Accommodation')}} </a></li>
                         <li><a class="nav-link" href="{{ url('/vacation') }}">{{ __('messages.Vacations')}} </a></li>
+                        @if (Auth::check())
+                        <li><a class="nav-link" href="{{ url('/favourites') }}">{{ __('messages.Favourites')}} </a></li>
+                        @endif
 
 
                     </ul>
