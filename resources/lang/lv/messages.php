@@ -86,4 +86,6 @@ return [
     'Like' => 'Patīk',
     'Favourites' => 'Favorīti',
     'Delete' => 'Dzēst',
+    'People_voted' => 'Balsu skaits',
+    'Rating' => 'Reitings',
     ];
