@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Accommodation;
 use App\Models\AccommodationFeedback;
@@ -19,7 +19,7 @@ class AccommodationController extends Controller
     {
 
         $accommodations= Accommodation::all();
-
+        $accfeedbacks = AccommodationFeedback::all();
         $user = Auth::user();
 
         /*Price change*/
@@ -38,7 +38,7 @@ class AccommodationController extends Controller
      */
     public function create()
     {
-        //
+        return view('accommodations.create');
     }
 
     /**
@@ -47,11 +47,35 @@ class AccommodationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+    /** 
+    *public function store(Request $request)
+    *{
+     *   $accommodation_feedback = new AccommodationFeedback();
+      *  $accommodation_feedback->accommodation_id=$request->accommodation_id;
+       * $accommodation_feedback->user_id=$request->user_id;
+        *$accommodation_feedback->feedback_description=$request->feedback_description;
+        *$accommodation_feedback->save();
+        *return redirect('accommodation/'.*$accommodation_feedback->accommodation_id.'/show');   
+
+*} */
+public function store(Request $request)
     {
+    	$request->validate([
+            'title'=>'required',
+            'body'=>'required',
+        ]);
+    
+        Accommodation::create($request->all());
+    
+        return redirect()->route('accommodations.index');
+    }
+    public function shows($id)
+    {
+    	$post = Accommodation::find($id);
+        return view('accommodations.shows', compact('accommodation'));
+    }
 
-
-}
     /**
      * Display the specified resource.
      *
@@ -66,24 +90,22 @@ class AccommodationController extends Controller
         return view('accommodation_new',compact('accommodations', 'accommodation_feedback', 'users'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+public function like($id)
     {
-        //
+        $accommodations=Accommodation::where('id', $id)->first();
+        $accommodation_feedback=AccommodationFeedback::where('accommodation_id', '=', $id)->first();
+        $users=User::where('id', $id)->first();
+        return view('accfavourites',compact('accommodations', 'accommodation_feedback', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+public function delete($id)
+    {
+        $accommodations=Accommodation::where('id', $id)->first();
+        $accommodation_feedback=AccommodationFeedback::where('accommodation_id', '=', $id)->first();
+        $users=User::where('id', $id)->first();
+        return view('accdelete',compact('accommodations', 'accommodation_feedback', 'users'));
+    }
+
     public function update(Request $request, $id)
     {
         //
@@ -97,7 +119,10 @@ class AccommodationController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+Accommodation::findOrFail($id)->delete();
+return redirect('admin/');
+
     }
 
     public function welcometest() {
@@ -109,4 +134,52 @@ class AccommodationController extends Controller
         return View::make('accommodations', compact('accommodations'));
     }
 
+    public function insertform() {
+      return view('create');
+   }
+
+   public function insert(Request $request) {
+      $accommodation_name = $request->input('accommodation_name');
+      $accommodation_price = $request->input('accommodation_price');
+      $accommodation_city = $request->input('accommodation_city');
+      $accommodation_type = $request->input('accommodation_type');
+      $accommodation_address = $request->input('accommodation_address');
+      $start_date = $request->input('start_date');
+      $end_date = $request->input('end_date');
+      $accommodation_tags = $request->input('accommodation_tags');
+      $accommodation_description = $request->input('accommodation_description');
+      $image = $request->input('image');
+      DB::insert('insert into accommodations (accommodation_name,accommodation_price,accommodation_type,accommodation_city,accommodation_address,start_date, end_date, accommodation_tags, accommodation_description,image) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',[$accommodation_name,$accommodation_price,$accommodation_type,$accommodation_city, $accommodation_address, $start_date, $end_date, $accommodation_tags, $accommodation_description, $image]);
+      echo "Record inserted successfully.<br/>";
+      echo '<a href = "/admin">Click Here</a> to go back.';
+   }
+   public function show1($id) {
+
+
+         $accommodation = DB::select('select * from accommodations where id = ?',[$id]);
+         return view('update',['accommodation'=>$accommodation]);
+      }
+      public function edit(Request $request,$id) {
+        $accommodation_name = $request->input('accommodation_name');
+        $accommodation_price = $request->input('accommodation_price');
+        $accommodation_city = $request->input('accommodation_city');
+        $accommodation_type = $request->input('accommodation_type');
+        $accommodation_address = $request->input('accommodation_address');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $accommodation_tags = $request->input('accommodation_tags');
+        $accommodation_description = $request->input('accommodation_description');
+        $image = $request->input('image');
+         DB::update('update accommodations set accommodation_name = ? where id = ?',[$accommodation_name,$id]);
+         DB::update('update accommodations set accommodation_price = ? where id = ?',[$accommodation_price,$id]);
+         DB::update('update accommodations set accommodation_city = ? where id = ?',[$accommodation_city,$id]);
+         DB::update('update accommodations set accommodation_address = ? where id = ?',[$accommodation_address,$id]);
+         DB::update('update accommodations set start_date = ? where id = ?',[$start_date,$id]);
+         DB::update('update accommodations set end_date = ? where id = ?',[$end_date,$id]);
+         DB::update('update accommodations set accommodation_tags = ? where id = ?',[$accommodation_tags,$id]);
+         DB::update('update accommodations set accommodation_description = ? where id = ?',[$accommodation_description,$id]);
+         DB::update('update accommodations set image = ? where id = ?',[$image,$id]);
+         echo "Records updated successfully.<br/>";
+         echo '<a href = "/admin">Click Here</a> to go back.';
+      }
 }
