@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
 <a href="vacations.blade.php"></a>
@@ -16,7 +17,6 @@ body{
                   height: 100vh;
                   margin: 0;
                   box-sizing: border-box;
-
 }
 .gallery{
   display: flex;
@@ -49,7 +49,6 @@ figure figcaption{
   margin-right: auto;
   width: 40%;
 }
-
 .button {
   border-radius: 4px;
   background-color: red;
@@ -63,14 +62,12 @@ figure figcaption{
   cursor: pointer;
   margin: 2px;
 }
-
 .button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.2s;
 }
-
 .button span:after {
   content: '\00bb';
   position: absolute;
@@ -79,11 +76,9 @@ figure figcaption{
   right: -10px;
   transition: 0.5s;
 }
-
 .button:hover span {
   padding-right: 15px;
 }
-
 .button:hover span:after {
   opacity: 1;
   right: 0;
@@ -92,16 +87,13 @@ figure figcaption{
   transition: transform .2s;
   margin: 0 auto;
 }
-
 .zoom:hover {
   -webkit-transform: scale(1.01); /* Safari 3-8 */
   transform: scale(1.01);
 }
 .filter{
-
   padding-top: 25px;
 }
-
 .table{
   border-style: solid;
   border-color: black;
@@ -121,7 +113,6 @@ figure figcaption{
     margin: 2px;
 }
 .sb:hover {background-color: #3e8e41}
-
 .sb:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
@@ -133,7 +124,6 @@ figure figcaption{
 .tags{
 margin-left: 21%;
 padding-top: 30px;
-
 }
 #input{
   padding-right: 410px;
@@ -222,6 +212,7 @@ padding-top: 30px;
     <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
     <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
   <center><button id="view" class="button" onclick="showVacations({{ $vacation->id }})"><span>{{ __('messages.View')}}</span></button></center>
+  <center><a type="button" class="button" id='create_order_pack'  href="{{ action([\App\Http\Controllers\OrderPackController::class, 'create'], $vacation->id)}}"> {{ __('messages.Reserve') }} </a></center>
   <?php
   $userid = Auth::id();
   $count = 0;
