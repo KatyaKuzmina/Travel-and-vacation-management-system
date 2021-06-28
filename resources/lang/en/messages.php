@@ -79,4 +79,3 @@ return [
     'Favourites' => 'Favourites',
     'Delete' => 'Delete',
 ];
-];
