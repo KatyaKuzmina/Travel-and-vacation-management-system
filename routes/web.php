@@ -1,14 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccommodationReservationController;
 use App\Http\Controllers\VacationPackagesController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\FavouriteController;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
 use App\Models\AccommodationReservations;
@@ -31,18 +30,19 @@ use App\Models\PackageRes;
 
 
 Route::get('/accommodation', [\App\Http\Controllers\AccommodationController::class, 'index'])->name('accommodation');
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/vacation', [\App\Http\Controllers\VacationPackagesController::class, 'index']);
+Route::post('/show', [\App\Http\Controllers\OrderController::class, 'store']);
+Route::post('/showpack', [\App\Http\Controllers\OrderPackController::class , 'store']);
 //Route::redirect('/', 'accommodation');
 //Route::resource('accommodation', AccommodationController::class);
 //Auth::routes();
 
-Route::redirect('/', 'vacation');
-Route::resource('vacation', VacationPackagesController::class);
+//Route::redirect('/', 'vacation');
+//Route::resource('vacation', VacationPackagesController::class);
 Auth::routes();
 Route::get('/about', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
 Route::get('/', [\App\Http\Controllers\AccommodationController::class, 'welcometest'])->name('about');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 //Route::get ( '/', function () {
 //    return view ( 'asearch' );
 //} );
@@ -66,8 +66,6 @@ Route::any ( '/search2', function () {
 } );
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::any ( '/search1', function () {
 
@@ -109,21 +107,27 @@ Route::any ( '/search3', function () {
 Route::get('accommodation/{id}/show', [AccommodationController::class, 'show']);
 Route::get('vacation/{id}/show', [VacationPackagesController::class, 'show']);
 
-//Route::get('/{lang}', function ($lang) {
-    //App::setlocale($lang);
-  //  return view('about');
-//});
 
-Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'App\Http\Controllers\LanguageController@switchLang']);
+Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/reservations', [\App\Http\Controllers\OrderController::class, 'orders']);
 Route::get('/reservationcheck/{id?}', [\App\Http\Controllers\OrderController::class, 'create']);
+Route::get('/reservationpackcheck/{id?}', [\App\Http\Controllers\OrderPackController::class, 'create']);
+// Admin
 
-//liking accommodation
+
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
+    Route::get('/admin/{id}', [App\Http\Controllers\AccommodationController::class, 'destroy']);
+    Route::get('/create',[App\Http\Controllers\AccommodationController::class,'insertform']);
+    Route::post('create',[App\Http\Controllers\AccommodationController::class,'insert']);
+    Route::get('update',[App\Http\Controllers\AccommodationController::class,'index']);
+    Route::get('edit/{id}',[App\Http\Controllers\AccommodationController::class,'show1']);
+    Route::post('edit/{id}',[App\Http\Controllers\AccommodationController::class, 'edit']);
+
+    //liking accommodation
     Route::get('accommodation/{id}/like', [AccommodationController::class, 'like']);
 
 //delete accommodation
