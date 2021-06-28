@@ -34,9 +34,7 @@
                       <li><a class="nav-link" href="{{ url('/about') }}">{{ __('messages.About')}}</a></li>
                         <li><a class="nav-link" href="{{ url('/accommodation') }}">{{ __('messages.Accommodation')}} </a></li>
                         <li><a class="nav-link" href="{{ url('/vacation') }}">{{ __('messages.Vacations')}} </a></li>
-                        @if (Auth::check())
-                        <li><a class="nav-link" href="{{ url('/favourites') }}">{{ __('messages.Favourites')}} </a></li>
-                        @endif
+                       
 
 
                     </ul>
@@ -45,7 +43,11 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         @if (Auth::check())
+                        <li><a class="nav-link" href="{{ url('/admin') }}">{{ __('Admin')}}</a></li>
                         <li><a class="nav-link" href="{{ url('/reservations') }}">{{ __('messages.Reservations')}} </a></li>   
+                        @endif
+                        @if (Auth::check())
+                        <li><a class="nav-link" href="{{ url('/favourites') }}">{{ __('messages.Favourites')}} </a></li>
                         @endif
                       <li class="nav-item dropdown">               
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
