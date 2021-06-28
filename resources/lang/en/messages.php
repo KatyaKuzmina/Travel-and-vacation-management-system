@@ -75,5 +75,8 @@ return [
     'desc8' => 'Airsoft is a team sport or military simulation game. Airsoft mainly uses replicas of combat weapons that shoot with 6mm plastic bullets. No color is emitted from the bullets of airsoft rifles, so airsoft is a game of honesty and each participant must find a hit.',
     'desc9' => 'This one and a half hour procedure is a pleasant way to make your skin beautiful and healthy, as well as to relax and unwind from everyday problems. The massage with the use of a natural chocolate mask tones, moisturizes and nourishes the skin, and the strawberry scrub perfectly cleanses it!',
     'desc10' => 'Strengthen immunity and enjoy salt therapy, which has long been known as an effective method of strengthening immunity, because its special microclimate has an effect that has a positive effect on both the body and the spirit.',
-
+    'Like' => 'Like',
+    'Favourites' => 'Favourites',
+    'Delete' => 'Delete',
+];
 ];
