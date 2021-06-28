@@ -4,7 +4,9 @@
 <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" >
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="lv">
 <head>
+    <meta charset="utf-8">
 <style>
 body{
   background-color: #fff;
@@ -106,13 +108,17 @@ figure figcaption{
   background-color: #E0FFFF;
 }
 .sb{
-  background-color: red;
-  border-radius: 50%;
-  border-color: grey;
-  padding: 15px;
-  box-shadow: 0 3px #999;
-  text-align: center;
-  color: white;
+    border-radius: 4px;
+    background-color: red;
+    border: none;
+    color: white;
+    text-align: center;
+    width: 10%;
+    font-size: 15px;
+    padding: 10px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 2px;
 }
 .sb:hover {background-color: #3e8e41}
 
@@ -136,10 +142,6 @@ padding-top: 30px;
   font-size:18px;
 }
 </style>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -151,6 +153,7 @@ padding-top: 30px;
                     <div class="input-group">
                       <label><b>{{ __('messages.Search_by_tags')}}: </b></label>
                         <input id="input" type="text" name="q" placeholder="#brieftaking">
+                        <button style="background-color: red; color:white">Go!</button>
                       </div>
                     </div>
                 </form>
@@ -158,51 +161,56 @@ padding-top: 30px;
         <div class="filter">
         <table class="table">
           <th style = "text-transform:uppercase;"><center>{{ __('messages.Filter_box')}}</center></th>
-          <tr><td>
-        {!! Form::open(['action' => 'Search2Controller@index', 'method' => 'GET']) !!}
-          <div class = "form-group">
-            <span>{{ __('messages.Location')}}:</span>
-          <select id = "nameid" style="width:200px">
-            <option></option>
-            @foreach($vacations as $d)
-            <option>{{$d->package_city}}</option>
-            @endforeach
-        </select>
-        </div>
-        </td></tr>
-        <form action="/search4" method="POST" role="search">
-              {{ csrf_field() }}
-        <div class="input-group">
-        <tr><td> {{ __('messages.Date')}} <input type="date" name="date"> </td></tr>
-        <span class="input-group-btn">
-                 <button type="submit" class="btn btn-default">
-                     <span class="glyphicon glyphicon-search"></span>
-                   </button>
-            </span>
-          </div>
-        </form>
-        <form action="/search6" method="POST" role="search">
-              {{ csrf_field() }}
+            <form action="/search3" method="POST" role="search">
+               {{ csrf_field() }}
+            <tr><td> {{ __('messages.Location')}}:
+                 <div class="row">
+                   <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                      <div class="form-group">
+                         <select class="selectpicker search-fields" name="vlocation">
+                        <option value=""></option>
+                       <option value="Salaspils"> Salaspils </option>
+                       <option value="Rīga"> Rīga</option>
+                       <option value="Jelgava"> Jelgava </option>
+                       <option value="Krimuldas novads"> Krimuldas novads </option>
+                       <option value="Engures novads"> Engures novads </option>
+                       <option value="Tukums"> Tukums </option>
+                    </select>
+                 </div>
+              </div>
+            </td></tr>
+            <div class="input-group">
+            <tr><td>{{ __('messages.Date')}}: <input type="date" name="date"></button></td></tr>
+            <span class="input-group-btn"></span>
+              </div>
         <div class="input-group">
           <tr><td>{{ __('messages.Price')}}:<input type="text" placeholder="30" name="vprice"></td></tr>
           <span class="input-group-btn">
-                   <button type="submit" class="btn btn-default">
-                       <span class="glyphicon glyphicon-search"></span>
-                     </button>
               </span>
             </div>
-          </form>
+          <div class="input-group">
           <tr><td>{{ __('messages.Package_type')}}:
-            <select id = "nameid1" style="width:200px">
-              <option></option>
-              @foreach($vacations as $t)
-              <option>{{$t->package_type}}</option>
-              @endforeach
-          </select>
-        </td></tr>
-          <td><center><input class="sb" type="submit" value="{{ __('messages.Search')}}!"><center> </td></tr>
-          </table>
-        </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+               <div class="form-group">
+                  <select class="selectpicker search-fields" name="package_type">
+                    <option value=""></option>
+                     <option value="Extreme"> Extreme </option>
+                     <option value="Sport and Activities"> Sport and Activities </option>
+                     <option value="Relax and selfcare"> Relax and selfcare </option>
+                  </select>
+               </div>
+            </div>
+          </tr></td>
+          <div class="row p-3">
+             <div class="col-lg-12 col-md-12 col-sm-6 col-12">
+                <div class="form-group">
+                   <td><center><button class="sb" class="search-button">{{ __('messages.Search')}}</button></div></center>
+                </div>
+             </div>
+          </div>
+       </form>
+     </table>
+   </div>
         @if (count($vacations)==0)
 <center><p id="searchfor"> Unfortunately, there are no vacation packages available for now!</p><center>
 @else
@@ -214,6 +222,50 @@ padding-top: 30px;
     <img <img src="{{ $vacation->image }}" alt="package_image" style="width:180px" style="height:90px">
     <figcaption>{{ $vacation->package_price }}<p>EUR</p></figcaption>
   <center><button id="view" class="button" onclick="showVacations({{ $vacation->id }})"><span>{{ __('messages.View')}}</span></button></center>
+  <?php
+  $userid = Auth::id();
+  $count = 0;
+  $zero = 0;
+  if (Auth::check()){
+    $link = mysqli_connect("127.0.0.1", "admin", "0000");
+    $link->set_charset("utf8mb4");
+    mysqli_select_db($link, "database");
+    $loop = mysqli_query($link, "SELECT * FROM fav_packages WHERE user_id=$userid") or die (mysqli_error($link));
+    while ($row = mysqli_fetch_array($loop)) {
+      $r = $row['package_id'];
+      $a = $vacation->id;
+      $one = 1;
+      $zero = 0;
+      if ($r == $a){
+        $count = $count + $one;
+      } 
+    }
+    if ($count == $zero){
+?>
+  <center><button id="view" class="button" onclick="newLike({{ $vacation->id }})"><span>{{ __('messages.Like')}}</span></button></center>
+  <script>
+    function newLike(vacationID) {
+    window.location.href="/vacation/"+vacationID+"/like";
+    }
+  </script>
+<?php
+    }
+    else{    
+?>
+<?php
+    }  
+  }
+  else { 
+?>
+  <center><button id="view" class="button" onclick="newLike({{ $vacation->id }})"><span>{{ __('messages.Like')}}</span></button></center>
+  <script>
+    function newLike(vacationID) {
+      window.location.href="/login/";
+    }
+  </script>
+<?php
+  }
+?>
     </figure>
     </div>
 </div>
@@ -224,20 +276,5 @@ padding-top: 30px;
         window.location.href="/vacation/"+vacationID+"/show";
     }
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-<script type="text/javascript">
-
-      $("#nameid").select2({
-            placeholder: "Select a City",
-            allowClear: true
-        });
-
-        $("#nameid1").select2({
-              placeholder: "Select a Type",
-              allowClear: true
-          });
-</script>
-
 </body>
 @endsection
