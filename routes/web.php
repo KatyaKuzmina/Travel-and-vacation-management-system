@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccommodationReservationController;
 use App\Http\Controllers\VacationPackagesController;
 use App\Http\Controllers\LanguageController;
@@ -119,3 +121,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/reservations', [\App\Http\Controllers\OrderController::class, 'orders']);
 Route::get('/reservationcheck/{id?}', [\App\Http\Controllers\OrderController::class, 'create']);
+
+//liking accommodation
+    Route::get('accommodation/{id}/like', [AccommodationController::class, 'like']);
+
+//liking vacations
+    Route::get('vacation/{id}/like', [VacationPackagesController::class, 'like']);
+    
+//showing favourites
+Route::get('/favourites', [\App\Http\Controllers\FavouriteController::class, 'index'])->name('favourites');
