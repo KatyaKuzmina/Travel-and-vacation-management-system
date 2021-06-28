@@ -90,4 +90,6 @@ return [
     'Like' => 'Like',
     'Favourites' => 'Favourites',
     'Delete' => 'Delete',
+    'People_voted' => 'Votes',
+    'Rating' => 'Rating',
 ];
