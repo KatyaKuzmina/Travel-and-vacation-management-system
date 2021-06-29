@@ -30,11 +30,11 @@ class CommentController extends Controller
   DB::insert('insert into comments (comment, user_id, accommodation_id) values(?, ?, ?)',[$comment, $userid, $acc_id]);
   ?>
   <br>
-  <p style="font-size: 50px; text-align: justify; margin-left: 30%; margin-right: 25%;" >Thank you for your feedback</p>
+  <p style="font-size: 40px; text-align: justify; margin-left: 30%; margin-right: 25%;" >Thank you for your feedback</p>
 
-  <p style="font-size: 50px; text-align: justify; margin-left: 30%; margin-right: 25%;" >Paldies par jūsu atsauksmēm</p>
+  <p style="font-size: 40px; text-align: justify; margin-left: 30%; margin-right: 25%;" >Paldies par jūsu atsauksmēm</p>
 
- <p style="font-size: 50px; text-align: justify; margin-left: 40%; margin-right: 40%;" ><a href="#" onclick="location.href = document.referrer; return false;">Back/Atpakaļ</a></p>
+ <p style="font-size: 40px; text-align: justify; margin-left: 40%; margin-right: 40%;" ><a href="#" onclick="location.href = document.referrer; return false;">Back/Atpakaļ</a></p>
 
   <?php
 
