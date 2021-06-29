@@ -92,4 +92,6 @@ return [
     'Delete' => 'Delete',
     'People_voted' => 'Votes',
     'Rating' => 'Rating',
+    'Submit' => 'Submit',
+    'Comment' => 'Write a review',
 ];
