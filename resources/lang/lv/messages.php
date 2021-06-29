@@ -88,4 +88,6 @@ return [
     'Delete' => 'Dzēst',
     'People_voted' => 'Balsu skaits',
     'Rating' => 'Reitings',
+    'Submit' => 'Iesniegt',
+    'Comment' => 'Rakstīt atsauksmi',
     ];
