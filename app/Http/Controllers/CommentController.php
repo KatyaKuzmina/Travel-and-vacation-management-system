@@ -18,10 +18,10 @@ class CommentController extends Controller
   }
    public function insert(Request $request) {
 
-    // $rules = array(
-    //   'comment' => 'required|string',
-    // );
-    // $this->validate($request, $rules);
+   $rules = array(
+    'comment' => 'required',
+    );
+    $this->validate($request, $rules);
 
   $comment = $request->input('comment');
   $userid = $request->input('user_id');
