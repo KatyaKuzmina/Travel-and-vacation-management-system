@@ -141,3 +141,11 @@ Route::get('vacation/{id}/delete', [VacationPackagesController::class, 'delete']
     
 //showing favourites
 Route::get('/favourites', [\App\Http\Controllers\FavouriteController::class, 'index'])->name('favourites');
+
+//comments_accommodation
+Route::get('comment','CommentController@insertform');
+Route::post('accommodation/{id}/show','CommentController@insert');
+
+//comments_vacation
+Route::get('comment','VacCommentController@insertform');
+Route::post('vacation/{id}/show','VacCommentController@insert');
