@@ -89,7 +89,6 @@ body {
   padding: 20px 0% 0% 0%;
   text-align: justify;
 }
-
 .star {
   position: relative;
   
@@ -104,7 +103,6 @@ body {
   border-right:  .3em solid transparent;
   border-bottom: .7em  solid #FC0;
   border-left:   .3em solid transparent;
-
   /* Controlls the size of the stars. */
   font-size: 24px;
 }
@@ -145,7 +143,6 @@ body {
   .star:after {  
     transform: rotate(35deg);
   }
-
   #desc1{
 background-color: none; /* Green */
   border-style: solid;
@@ -157,7 +154,6 @@ background-color: none; /* Green */
   font-size: 18px;
   margin: 10px 0px 10px 0px;
   border-radius: 20px;
-
 }
 </style>
 
@@ -214,6 +210,7 @@ background-color: none; /* Green */
 <div style="background-color:#f2f0f8;">
   <div class="feedback" style="background-color:#f2f0f8;">
     <?php
+//---------------------------Feedback-------------------------------------------------
       $link = mysqli_connect("127.0.0.1", "admin", "0000");
       $link->set_charset("utf8mb4");
       mysqli_select_db($link, "database");
@@ -234,9 +231,64 @@ background-color: none; /* Green */
         }
       }
       //printf("Current character set: %s\n", $link->character_set_name());
+      $userid = Auth::id();
+
+//--------------------------------------Comments----------------------------------------    
+      $link = mysqli_connect("127.0.0.1", "admin", "0000");
+      $link->set_charset("utf8mb4");
+      mysqli_select_db($link, "database");
+      $loop = mysqli_query($link, "SELECT * FROM vaccomments") or die (mysqli_error($link));
+      while ($row = mysqli_fetch_array($loop)) {
+        if ($row['user_id']==$userid){
+          $loops = mysqli_query($link, "SELECT * FROM users") or die (mysqli_error($link));
+          while ($rows = mysqli_fetch_array($loops)) {
+            if ($row['user_id']==$rows['id']) {
+              if($row['package_id'] == $vacations->id){
+                echo "<u>". '<span style="font-size: 20px;">'. $rows['name']. '</span>'. "</u>". "<br/>";
+                echo "<br/>";
+                echo $row['comment'] . "<br/>";
+                echo "<br/>";
+               }
+            }
+          }
+        }
+      }
+    
+      //printf("Current character set: %s\n", $link->character_set_name());
+     $userid = Auth::id();
     ?>
+  <br>
+  <?php
+  if (Auth::check()){
+    ?>
+  <form action = "/comment" method = "post">
+   <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+    <input type = "hidden" name = "user_id" value = "{{ $userid }}">
+    <input type = "hidden" name = "package_id" value = "{{ $vacations->id }}">
+  <table class="table">
+      <tr>
+        <td><span> {{ __('messages.Comment' )}} </span> <input type='textarea' name='comment' /></td>
+      </tr>
+      <td colspan = '2'>
+        <input class="btn btn-success" type="submit" value="{{ __('messages.Submit' )}}" onClick='location.href="vacation/{id}/show"'>
+      </td>
+    </tr>
+  </table>
+  </form>
+  @if (count($errors) > 0)
+  <div>
+  <ul>
+  @foreach ($errors->all() as $error)
+  <li>{{ $error }}</li>
+  @endforeach
+  </ul>
   </div>
+  @endif
+  <?php
+  }
+  ?>
+ 
 </div>
-</form>
+
 </body>
 @endsection
